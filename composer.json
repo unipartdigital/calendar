@@ -42,14 +42,14 @@
 		"fxp/composer-asset-plugin": "*"
     },
 	"config": {
-		"vendor-dir": "/lib/vendor/"
+		"bin-dir": "plugins/calendar/lib/vendor"
 	},
      "extra": {
         "roundcube": {
             "min-version": "1.4.0",
             "sql-dir": "drivers/caldav/SQL",
 		"asset-installer-paths": {
-			"npm-asset-library": "/lib/vendors/league"
+			"npm-asset-library": "plugins/calendar/lib/vendor/league"
     }
         }
     }
