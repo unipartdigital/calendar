@@ -36,7 +36,7 @@
         "texxasrulez/libkolab" : ">=1.0",
 		"sabre/dav" : "~3.0",
 		"sabre/event" : "~2.0.2",
-		"sabre/vobject" : "^4.3",
+        "sabre/vobject" : "^4.3",
 		"league/oauth2-client" : "*",
 		"league/oauth2-google" : "*",
 		"fxp/composer-asset-plugin" : "*"
