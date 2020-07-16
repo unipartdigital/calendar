@@ -46,6 +46,11 @@
             "League\\OAuth2\\Client\\" : "src/"
         }
     },
+    "autoload" : {
+        "psr-4" : {
+            "Sabre\\Dav\\Client\\" : "src/"
+        }
+    },
      "extra" : {
         "roundcube" : {
         "min-version" : "1.4.0",
