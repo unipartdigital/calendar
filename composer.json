@@ -1,5 +1,5 @@
 {
-    "name": "texxasrulez/roundcube_caldav_calendar",
+    "name": "texxasrulez/calendar",
     "type": "roundcube-plugin",
     "description": "CalDav Capable Calendar plugin for Roundcube forked from Kolab 3.5.2. The _te stands for Texas Edition",
     "homepage": "https://github.com/texxasrulez/roundcube_caldav_calendar",
@@ -9,6 +9,7 @@
 		{
             "name": "Gene Hawkins",
             "email": "texxasrulez@yahoo.com",
+			"homepage": "https://www.genesworld.net",
             "role": "Developer"
         },
 		{
@@ -31,8 +32,8 @@
     "require": {
         "php": ">=7.1.0",
         "roundcube/plugin-installer": ">=0.1.3",
-        "texxasrulez/roundcube_caldav_calendar_libcalendaring": "*",
-        "texxasrulez/roundcube_caldav_calendar_libkolab": "*",
+        "texxasrulez/libcalendaring": ">=1.0",
+        "texxasrulez/libkolab": ">=1.0",
 		"sabre/dav": "*",
 		"sabre/event": "*",
 		"sabre/vobject": "*",
@@ -41,7 +42,7 @@
 		"fxp/composer-asset-plugin": "*"
     },
 	"config": {
-		"vendor-dir": "/lib/vendors"
+		"vendor-dir": "/lib/vendors/"
 	},
      "extra": {
         "roundcube": {
