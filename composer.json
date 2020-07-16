@@ -47,16 +47,11 @@
             "fkooman\\OAuth\\Client\\": "src/"
         }
     },
-	"config": {
-        "vendor-dir": "/plugins/calendar/lib/vendor"
-	},
      "extra": {
         "roundcube": {
-            "min-version": "1.4.0",
-            "sql-dir": "SQL",
-		"asset-installer-paths": {
-			"npm-asset-library": "/plugins/calendar/lib/vendor/league"
-    }
+        "min-version": "1.4.0",
+        "sql-dir": "SQL",
+        "vendor-dir": "lib/vendor"
         }
     }
 }
