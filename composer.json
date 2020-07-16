@@ -50,7 +50,7 @@
         "roundcube" : {
         "min-version" : "1.4.0",
         "sql-dir" : "SQL",
-		}
         "vendor-dir" : "lib/vendor"
+        }
     }
 }
