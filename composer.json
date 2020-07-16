@@ -39,7 +39,7 @@
 		"sabre/vobject": "*",
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*",
-		"fxp/composer-asset-plugin": "*"',
+		"fxp/composer-asset-plugin": "*",
 		"fkooman/oauth2-client": ">=0.1"
     },
 	"config": {
