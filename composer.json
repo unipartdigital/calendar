@@ -42,15 +42,20 @@
 		"fxp/composer-asset-plugin": "*",
 		"fkooman/oauth2-client": ">=0.1"
     },
+    "autoload": {
+        "psr-4": {
+            "fkooman\\OAuth\\Client\\": "src/"
+        }
+    },
 	"config": {
-        "vendor-dir": "plugins/calendar/lib/vendor"
+        "vendor-dir": "/plugins/calendar/lib/vendor"
 	},
      "extra": {
         "roundcube": {
             "min-version": "1.4.0",
             "sql-dir": "SQL",
 		"asset-installer-paths": {
-			"npm-asset-library": "plugins/calendar/lib/vendor/league"
+			"npm-asset-library": "/plugins/calendar/lib/vendor/league"
     }
         }
     }
