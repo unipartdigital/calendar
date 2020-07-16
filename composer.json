@@ -40,7 +40,7 @@
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*",
 		"fxp/composer-asset-plugin": "*"',
-		"fkooman/oauth2-client": "*"
+		"fkooman/oauth2-client": ">=0.1"
     },
 	"config": {
         "vendor-dir": "plugins/calendar/lib/vendor"
