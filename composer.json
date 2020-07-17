@@ -1,54 +1,54 @@
 {
-    "name" : "texxasrulez/calendar",
-    "type" : "roundcube-plugin",
-    "description" : "CalDav Capable Calendar plugin for Roundcube and Nextcloud",
-    "homepage" : "https://github.com/texxasrulez/roundcube_caldav_calendar",
-    "license" : "GPL-3.0-only",
-    "version" : "1.0",
-    "authors" : [
+    "name": "texxasrulez/calendar",
+    "type": "roundcube-plugin",
+    "description": "CalDav Capable Calendar plugin for Roundcube and Nextcloud",
+    "homepage": "https://github.com/texxasrulez/roundcube_caldav_calendar",
+    "license": "GPL-3.0+",
+    "version": "1.0",
+    "authors": [
 		{
-            "name" : "Gene Hawkins",
-            "email" : "texxasrulez@yahoo.com",
-			"homepage" : "https://www.genesworld.net",
-            "role" : "Developer"
+            "name": "Gene Hawkins",
+            "email": "texxasrulez@yahoo.com",
+			"homepage": "https://www.genesworld.net",
+            "role": "Developer"
         },
 		{
-            "name" : "Thomas Bruederli",
-            "email" : "bruederli@kolabsys.com",
-            "role" : "Lead"
+            "name": "Thomas Bruederli",
+            "email": "bruederli@kolabsys.com",
+            "role": "Lead"
         },
         {
-            "name" : "Aleksander Machniak",
-            "email" : "machniak@kolabsys.com",
-            "role" : "Developer"
+            "name": "Aleksander Machniak",
+            "email": "machniak@kolabsys.com",
+            "role": "Developer"
         }
     ],
-    "repositories" : [
+    "repositories": [
 	{
-		"type" : "composer",
-		"url" : "https://plugins.roundcube.net"
+		"type": "composer",
+		"url": "https://plugins.roundcube.net"
 	}
     ],
-    "require" : {
-        "php" : ">=5.4",
-        "roundcube/plugin-installer" : ">=0.1.3",
-        "texxasrulez/libcalendaring" : ">=1.0",
-        "texxasrulez/libkolab" : ">=1.0",
-        "sabre/dav": "4.0.3",
-		"league/oauth2-client" : "*",
-		"league/oauth2-google" : "*",
-		"fxp/composer-asset-plugin" : "*"
+    "require": {
+        "php": ">=5.4",
+        "roundcube/plugin-installer": ">=0.1.3",
+        "texxasrulez/libcalendaring": ">=1.0",
+        "texxasrulez/libkolab": ">=1.0",
+        "sabre/dav": "4.0.1",
+		"league/oauth2-client": "*",
+		"league/oauth2-google": "*",
+		"fxp/composer-asset-plugin": "*"
     },
-    "autoload" : {
-        "psr-4" : {
-            "League\\OAuth2\\Client\\" : "src/",
-            "League\\OAuth2\\Google\\" : "src/",
-            "Sabre\\Dav\\Client\\" : "src/"
+    "autoload": {
+        "psr-4": {
+            "League\\OAuth2\\Client\\": "src/",
+            "League\\OAuth2\\Google\\": "src/",
+            "Sabre\\Dav\\Client\\": "src/"
         }
     },
-     "extra" : {
-        "roundcube" : {
-        "min-version" : "1.3.0",
+     "extra": {
+        "roundcube": {
+        "min-version": "1.3.0",
             "sql-dir": "SQL",
             "sql-dir": "drivers/caldav/SQL",
             "sql-dir": "drivers/database/SQL",
