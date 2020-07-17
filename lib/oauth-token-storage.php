@@ -21,7 +21,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once (dirname(__FILE__).'/vendor/autoload.php');
+require_once (dirname(__FILE__).'/../../../vendor/autoload.php');
 
 use fkooman\OAuth\Common\Scope;
 use fkooman\OAuth\Client\AccessToken;
