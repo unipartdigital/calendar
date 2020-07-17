@@ -35,11 +35,6 @@
         "texxasrulez/libcalendaring" : ">=1.0",
         "texxasrulez/libkolab" : ">=1.0",
         "sabre/dav": "3.0.9",
-        "sabre/vobject": "3.5.0",
-        "sabre/event": "2.0.2",
-        "sabre/http": "4.2.1",
-        "sabre/uri": "2.2.0",
-        "sabre/xml": "1.4.1",
 		"league/oauth2-client" : "*",
 		"league/oauth2-google" : "*",
 		"fxp/composer-asset-plugin" : "*"
