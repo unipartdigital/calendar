@@ -49,7 +49,10 @@
     },
     "autoload" : {
         "psr-4" : {
-            "Sabre\\VObject\\" : "src/"
+         "Sabre\\DAV\\": "lib/DAV/",
+         "Sabre\\DAVACL\\": "lib/DAVACL/",
+         "Sabre\\CalDAV\\": "lib/CalDAV/",
+         "Sabre\\CardDAV\\": "lib/CardDAV/"
         }
     },
      "extra" : {
