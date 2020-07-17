@@ -5,29 +5,27 @@
     "homepage" : "https://github.com/texxasrulez/roundcube_caldav_calendar",
     "license" : "GPL-3.0-only",
     "version" : "1.0",
-    "authors" : [
-	{
-    "config": {
+	"config": {
         "bin-dir": "bin",
         "vendor-dir": "/lib/vendor"
-		},
-	},
-	{
-	"name" : "Gene Hawkins",
-	"email" : "texxasrulez@yahoo.com",
-	"homepage" : "https://www.genesworld.net",
-	"role" : "Developer"
-	},
-	{
-	"name" : "Thomas Bruederli",
-	"email" : "bruederli@kolabsys.com",
-	"role" : "Lead"
-	},
-	{
-	"name" : "Aleksander Machniak",
-	"email" : "machniak@kolabsys.com",
-	"role" : "Developer"
-	}
+    },
+    "authors" : [
+		{
+            "name" : "Gene Hawkins",
+            "email" : "texxasrulez@yahoo.com",
+			"homepage" : "https://www.genesworld.net",
+            "role" : "Developer"
+        },
+		{
+            "name" : "Thomas Bruederli",
+            "email" : "bruederli@kolabsys.com",
+            "role" : "Lead"
+        },
+        {
+            "name" : "Aleksander Machniak",
+            "email" : "machniak@kolabsys.com",
+            "role" : "Developer"
+        }
     ],
     "repositories" : [
 	{
