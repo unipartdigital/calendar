@@ -35,11 +35,6 @@
         "texxasrulez/libcalendaring" : ">=1.0",
         "texxasrulez/libkolab" : ">=1.0",
 		"sabre/dav": "^4.0.0",
-        "sabre/vobject": "^4.2.0-alpha1",
-        "sabre/event" : "^5.0",
-        "sabre/xml"  : "^2.0.1",
-        "sabre/http" : "^5.0",
-        "sabre/uri" : "^2.0",
 		"league/oauth2-client" : "*",
 		"league/oauth2-google" : "*",
 		"fxp/composer-asset-plugin" : "*"
@@ -47,7 +42,8 @@
     "autoload" : {
         "psr-4" : {
             "League\\OAuth2\\Client\\" : "src/",
-            "Sabre\\Dav\\Client" : "src/"
+            "League\\OAuth2\\Google\\" : "src/",
+            "Sabre\\Dav" : "src/"
         }
     },
      "extra" : {
