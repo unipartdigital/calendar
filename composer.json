@@ -50,11 +50,7 @@
         "roundcube" : {
         "min-version" : "1.3.0",
             "sql-dir": "SQL",
-            "sql-dir": "drivers/caldav/SQL",
-            "sql-dir": "drivers/database/SQL",
-            "sql-dir": "drivers/ical/SQL",
-            "sql-dir": "drivers/kolab/SQL",
-            "sql-dir": "drivers/ldap/SQL"
+            "sql-dir": "plugins/calendar/plugins/calendar/drivers/caldav/SQL"
         }
     }
 }

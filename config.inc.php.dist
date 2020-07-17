@@ -158,7 +158,7 @@ $config['calendar_include_freebusy_data'] = 1;
 // To override the SMTP port or connection method, provide a full URL like 'tls://somehost:587'
 // This will add a link to invitation messages to allow users from outside
 // to reply when their mail clients do not support iTip format.
-$config['calendar_itip_smtp_server'] = 'smtp.genesworld.net:587';
+$config['calendar_itip_smtp_server'] = null;
 
 // SMTP username used to send (anonymous) itip messages
 $config['calendar_itip_smtp_user'] = '%u';
@@ -190,7 +190,7 @@ $config['kolab_invitation_calendars'] = false;
 $config['calendar_freebusy_session_auth_url'] = null;
 
 // Crypt key to encrypt passwords for added iCAL/CalDAV calendars
-$config['calendar_crypt_key'] = "4JS3Vadi9t+MeVzAAk3bHKXTY6Znyt";
+$config['calendar_crypt_key'] = "random_24_byte_string";
 
 // Enable debugging output for iCAL/CalDAV drivers
 $config['calendar_caldav_debug'] = false;
@@ -203,7 +203,6 @@ $config['calendar_ical_debug'] = false;
  create or select an app, add the Calendar API and create a new
  browser key.
 */
-/*
 $config['calendar_oauth_providers'] = array(
 
     "key" => array(
@@ -211,7 +210,7 @@ $config['calendar_oauth_providers'] = array(
         "scope" => "https://www.googleapis.com/auth/calendar",
         "json" => "/lib/vendor/oauth2/google_oauth.json" // Rename google_oauth.json.dist to google_oauth.json
     ) //,
-
+/*
     "key" => array(
         "name" => "Google OAuth Provider",
         "scope" => "https://www.googleapis.com/auth/calendar",
@@ -219,9 +218,8 @@ $config['calendar_oauth_providers'] = array(
         "client_secret" => "your_app_secret",
         "authorize_endpoint" => "https://accounts.google.com/o/oauth2/v2/auth",
         "token_endpoint" => "https://www.domain.tld/mail/?_task=calendar="
-    )
-);*/
-
+    ) */
+);
 
 // Pre-installed calendars, added at first access to calendar section
 // Caldav driver is supported only
@@ -231,7 +229,7 @@ $config['calendar_oauth_providers'] = array(
 					'name'         => '',
                     'caldav_user'  => '%u',
                     'caldav_pass'  => '%p',
-                    'caldav_url'   => 'https://www.%d/cloud/remote.php/dav/calendars/%u/',
+                    'caldav_url'   => 'https://www.domain.ltd/nextcloud/remote.php/dav/calendars/%u/',
 					'color' 	   =>  '',
                     'showAlarms'   => 1));
 ?>
