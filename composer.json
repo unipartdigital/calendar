@@ -34,7 +34,7 @@
         "roundcube/plugin-installer": "*",
         "texxasrulez/libcalendaring": ">=1.0",
         "texxasrulez/libkolab": ">=1.0",
-        "sabre/dav": "^4.3",
+        "sabre/dav": "^4.1",
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*",
 		"fxp/composer-asset-plugin": "*"
