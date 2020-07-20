@@ -29,6 +29,14 @@
 		"url": "https://plugins.roundcube.net"
 	}
     ],
+	"config": {
+		"vendor-dir": "lib/",
+		"optimize-autoloader": true,
+		"classmap-authoritative": true,
+		"platform": {
+			"php": "7.2.0"
+		}
+	},
     "require": {
         "php": ">=7.0.0",
         "texxasrulez/libcalendaring": "*",
@@ -65,8 +73,5 @@
             "League\\OAuth2\\Google\\": "src/",
             "Sabre\\Dav\\Client\\": "lib/"
         }
-    },
-	"config": {
-		"vendor-dir": "lib"
-		}
+    }
 }
