@@ -40,7 +40,7 @@
         "texxasrulez/libkolab": "*",
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*",
-		"fxp/composer-asset-plugin": "*"
+		"fxp/composer-asset-plugin": "*",
         "sabre/vobject": "^4.2.0-alpha1",
         "sabre/event" : "^5.0",
         "sabre/xml"  : "^2.0.1",
