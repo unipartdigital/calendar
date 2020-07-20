@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   `end` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `recurrence` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL,
   `title` varbinary(128) NOT NULL,
-  `description` text COLLATE utf8mb4_bin NOT NULL,
+  `description` varbinary(128) NOT NULL,
   `location` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `categories` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `url` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
