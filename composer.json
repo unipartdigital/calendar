@@ -8,7 +8,7 @@
 	"config": {
 		"vendor-dir": "./lib/",
         "bin-dir" : "./lib/bin"
-		}
+		},
     "authors": [
 		{
             "name": "Gene Hawkins",
