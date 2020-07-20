@@ -67,7 +67,10 @@
         "psr-4": {
             "League\\OAuth2\\Client\\": "src/",
             "League\\OAuth2\\Google\\": "src/",
-            "Sabre\\Dav\\Client\\": "lib/"
+            "Sabre\\DAV\\"     : "lib/DAV/",
+            "Sabre\\DAVACL\\"  : "lib/DAVACL/",
+            "Sabre\\CalDAV\\"  : "lib/CalDAV/",
+            "Sabre\\CardDAV\\" : "lib/CardDAV/"
         }
     },
      "extra": {
