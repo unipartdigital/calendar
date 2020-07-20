@@ -35,6 +35,7 @@
 	},
     "require": {
         "php": ">=7.0.0",
+        "roundcube/plugin-installer": "~0.1.6",
         "texxasrulez/libcalendaring": "*",
         "texxasrulez/libkolab": "*",
 		"league/oauth2-client": "*",
