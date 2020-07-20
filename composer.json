@@ -56,7 +56,8 @@
         "psr-4": {
             "League\\OAuth2\\Client\\": "src/",
             "League\\OAuth2\\Google\\": "src/",
-            "Sabre\\Dav\\Client\\": "lib/"
+            "Sabre\\Dav\\Client\\": "lib/",
+            "Sabre\\Http\\Client\\": "lib/"
         }
     }
 }

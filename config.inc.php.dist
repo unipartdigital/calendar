@@ -229,6 +229,7 @@ $config['calendar_oauth_providers'] = array(
 					'name'         => '',
                     'caldav_user'  => '%u',
                     'caldav_pass'  => '%p',
+                    'caldav_auth_type'  => '',
                     'caldav_url'   => 'https://www.domain.ltd/nextcloud/remote.php/dav/calendars/%u/',
 					'color' 	   =>  '',
                     'showAlarms'   => 1));
