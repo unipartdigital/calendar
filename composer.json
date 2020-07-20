@@ -6,8 +6,8 @@
     "license": "GPL-3.0+",
     "version": "1.0",
 	"config": {
-		"vendor-dir": "/lib/",
-        "bin-dir" : "/lib/bin"
+		"vendor-dir": "/../plugins/calendar/lib/vendor",
+        "bin-dir" : "/../plugins/calendar/lib/vendor/bin"
 		},
     "authors": [
 		{
