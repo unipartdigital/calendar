@@ -6,8 +6,8 @@
     "license": "GPL-3.0+",
     "version": "1.0",
 	"config": {
-		"vendor-dir": "lib/vendor",
-        "bin-dir" : "lib/vendor/bin"
+		"vendor-dir": "/lib/vendor",
+        "bin-dir" : "/lib/vendor/bin"
 		},
     "authors": [
 		{
@@ -40,6 +40,7 @@
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*",
 		"fxp/composer-asset-plugin": "*",
+        "sabre/dav": "^4.1",
         "sabre/vobject": "^4.2.0-alpha1",
         "sabre/event" : "^5.0",
         "sabre/xml"  : "^2.0.1",
