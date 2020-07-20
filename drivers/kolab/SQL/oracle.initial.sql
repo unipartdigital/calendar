@@ -1,10 +1,3 @@
-/**
- * Roundcube Calendar Kolab backend
- *
- * @author Aleksander Machniak
- * @licence GNU AGPL
- **/
-
 CREATE TABLE "kolab_alarms" (
     "alarm_id" varchar(255) NOT NULL PRIMARY KEY,
     "user_id" integer NOT NULL

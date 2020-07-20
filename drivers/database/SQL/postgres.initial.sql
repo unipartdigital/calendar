@@ -1,18 +1,3 @@
-/**
- * RoundCube Calendar
- *
- * Plugin to add a calendar to RoundCube.
- *
- * @author Lazlo Westerhof
- * @author Albert Lee
- * @author Aleksander Machniak <machniak@kolabsys.com>
- * @licence GNU AGPL
- * @copyright (c) 2010 Lazlo Westerhof - Netherlands
- * @copyright (c) 2014 Kolab Systems AG
- *
- **/
-
-
 CREATE SEQUENCE calendars_seq
     INCREMENT BY 1
     NO MAXVALUE

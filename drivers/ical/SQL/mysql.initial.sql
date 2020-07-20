@@ -1,25 +1,3 @@
-/**
- * iCAL Client
- *
- * @version @package_version@
- * @author Daniel Morlock <daniel.morlock@awesome-it.de>
- *
- * Copyright (C) Awesome IT GbR <info@awesome-it.de>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
-
 CREATE TABLE IF NOT EXISTS `ical_calendars` (
   `calendar_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -34,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `ical_calendars` (
 
   PRIMARY KEY(`calendar_id`),
   INDEX `ical_user_name_idx` (`user_id`, `name`),
-  CONSTRAINT `fk_ical_calendars_user_id` FOREIGN KEY (`user_id`)
+  CONSTRAINT `rc_ical_calendars_user_id` FOREIGN KEY (`user_id`)
   REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
@@ -72,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `ical_events` (
   INDEX `ical_uid_idx` (`uid`),
   INDEX `ical_recurrence_idx` (`recurrence_id`),
   INDEX `ical_calendar_notify_idx` (`calendar_id`,`notifyat`),
-  CONSTRAINT `fk_ical_events_calendar_id` FOREIGN KEY (`calendar_id`)
+  CONSTRAINT `rc_ical_events_calendar_id` FOREIGN KEY (`calendar_id`)
   REFERENCES `ical_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
@@ -84,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `ical_attachments` (
   `size` int(11) NOT NULL DEFAULT '0',
   `data` longtext NOT NULL,
   PRIMARY KEY(`attachment_id`),
-  CONSTRAINT `fk_ical_attachments_event_id` FOREIGN KEY (`event_id`)
+  CONSTRAINT `rc_ical_attachments_event_id` FOREIGN KEY (`event_id`)
   REFERENCES `ical_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 

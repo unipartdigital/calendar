@@ -1,4 +1,3 @@
-
 PRAGMA journal_mode = MEMORY;
 PRAGMA synchronous = OFF;
 PRAGMA foreign_keys = OFF;

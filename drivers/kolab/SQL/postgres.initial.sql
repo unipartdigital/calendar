@@ -1,10 +1,3 @@
-/**
- * Roundcube Calendar Kolab backend
- *
- * @author Sergey Sidlyarenko
- * @licence GNU AGPL
- **/
-
 CREATE TABLE IF NOT EXISTS kolab_alarms (
   alarm_id character varying(255) NOT NULL,
   user_id integer NOT NULL

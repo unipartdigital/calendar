@@ -1,24 +1,10 @@
-/**
- * Roundcube Calendar
- *
- * Plugin to add a calendar to Roundcube.
- *
- * @author Lazlo Westerhof
- * @author Thomas Bruederli
- * @author Albert Lee
- * @licence GNU AGPL
- * @copyright (c) 2010 Lazlo Westerhof - Netherlands
- * @copyright (c) 2014 Kolab Systems AG
- *
- **/
-
 CREATE TABLE calendars (
   calendar_id integer NOT NULL PRIMARY KEY,
   user_id integer NOT NULL default '0',
   name varchar(255) NOT NULL default '',
   color varchar(255) NOT NULL default '',
   showalarms tinyint(1) NOT NULL default '1',
-  CONSTRAINT fk_calendars_user_id FOREIGN KEY (user_id)
+  CONSTRAINT rc_calendars_user_id FOREIGN KEY (user_id)
     REFERENCES users(user_id)
 );
 
@@ -48,7 +34,7 @@ CREATE TABLE events (
   alarms text default NULL,
   attendees text default NULL,
   notifyat datetime default NULL,
-  CONSTRAINT fk_events_calendar_id FOREIGN KEY (calendar_id)
+  CONSTRAINT rc_events_calendar_id FOREIGN KEY (calendar_id)
     REFERENCES calendars(calendar_id)
 );
 
@@ -59,7 +45,7 @@ CREATE TABLE attachments (
   mimetype varchar(255) NOT NULL default '',
   size integer NOT NULL default '0',
   data text NOT NULL default '',
-  CONSTRAINT fk_attachment_event_id FOREIGN KEY (event_id)
+  CONSTRAINT rc_attachment_event_id FOREIGN KEY (event_id)
     REFERENCES events(event_id)
 );
 
@@ -70,7 +56,7 @@ CREATE TABLE itipinvitations (
   event text NOT NULL,
   expires datetime NOT NULL default '1000-01-01 00:00:00',
   cancelled tinyint(1) NOT NULL default '0',
-  CONSTRAINT fk_itipinvitations_user_id FOREIGN KEY (user_id)
+  CONSTRAINT rc_itipinvitations_user_id FOREIGN KEY (user_id)
     REFERENCES users(user_id)
 );
 

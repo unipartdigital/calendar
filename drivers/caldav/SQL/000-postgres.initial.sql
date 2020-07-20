@@ -1,25 +1,3 @@
-/**
- * CalDAV Client
- *
- * @version @package_version@
- * @author Hugo Slabbert <hugo@slabnet.com>
- *
- * Copyright (C) 2014, Hugo Slabbert <hugo@slabnet.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
-
 CREATE TYPE caldav_type AS ENUM ('vcal','vevent','vtodo','');
 
 CREATE TABLE IF NOT EXISTS caldav_props (
@@ -73,7 +51,7 @@ CREATE TABLE IF NOT EXISTS "caldav_calendars" (
   "caldav_last_change" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY("calendar_id"),
-  CONSTRAINT "fk_caldav_calendars_user_id" FOREIGN KEY ("user_id")
+  CONSTRAINT "rc_caldav_calendars_user_id" FOREIGN KEY ("user_id")
   REFERENCES "users"("user_id") ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 CREATE INDEX ON caldav_calendars (user_id, name);
@@ -115,7 +93,7 @@ CREATE TABLE IF NOT EXISTS "caldav_events" (
   "caldav_last_change" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY("event_id"),
-  CONSTRAINT "fk_caldav_events_calendar_id" FOREIGN KEY ("calendar_id")
+  CONSTRAINT "rc_caldav_events_calendar_id" FOREIGN KEY ("calendar_id")
   REFERENCES "caldav_calendars"("calendar_id") ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 CREATE INDEX ON caldav_events (uid);
@@ -136,7 +114,7 @@ CREATE TABLE IF NOT EXISTS "caldav_attachments" (
   "size" BIGINT NOT NULL DEFAULT '0',
   "data" TEXT NOT NULL,
   PRIMARY KEY("attachment_id"),
-  CONSTRAINT "fk_caldav_attachments_event_id" FOREIGN KEY ("event_id")
+  CONSTRAINT "rc_caldav_attachments_event_id" FOREIGN KEY ("event_id")
   REFERENCES "caldav_events"("event_id") ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
