@@ -6,8 +6,8 @@
     "license": "GPL-3.0+",
     "version": "1.0",
 	"config": {
-		"vendor-dir": "./lib/vendor",
-        "bin-dir" : "./lib/vendor/bin"
+		"vendor-dir": "lib/vendor",
+        "bin-dir" : "lib/vendor/bin"
 		},
     "authors": [
 		{
