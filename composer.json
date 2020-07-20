@@ -30,7 +30,6 @@
 	}
     ],
 	"config": {	
-		"name": "texxasrulez/calendar",
 		"vendor-dir": "./lib",
 		"bin-dir": "./lib",
 		"optimize-autoloader": true,
