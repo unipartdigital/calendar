@@ -33,7 +33,7 @@
         "texxasrulez/libkolab": "*",
         "league/oauth2-client": "*",
         "league/oauth2-google": "*",
-        "sabre/dav": "3.0.9",
+        "sabre/dav": "~4.1.0",
         "sabre/vobject": "*",
         "sabre/event" : "*",
         "sabre/xml"  : "*",
