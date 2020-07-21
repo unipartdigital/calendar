@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `caldav_attachments` (
-  `attachment_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `event_id` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `attachment_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `event_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
   `filename` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `mimetype` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `size` int(11) NOT NULL DEFAULT '0',
@@ -11,12 +11,12 @@ CREATE TABLE IF NOT EXISTS `caldav_attachments` (
 
 CREATE TABLE IF NOT EXISTS `caldav_calendars` (
   `calendar_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `user_id` int(11) UNSIGNED NOT NULL DEFAULT '0',
   `name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `color` varchar(8) COLLATE utf8mb4_bin NOT NULL,
   `showalarms` tinyint(1) NOT NULL DEFAULT '1',
   `caldav_url` varchar(1000) COLLATE utf8mb4_bin NOT NULL,
-  `caldav_tag` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `caldav_tag` varchar(32) COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `caldav_user` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
   `caldav_pass` varchar(1024) COLLATE utf8mb4_bin DEFAULT NULL,
   `caldav_oauth_provider` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
@@ -27,9 +27,9 @@ CREATE TABLE IF NOT EXISTS `caldav_calendars` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE IF NOT EXISTS `caldav_events` (
-  `event_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `event_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `calendar_id` int(11) UNSIGNED NOT NULL DEFAULT '0',
-  `recurrence_id` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `recurrence_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
   `uid` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `instance` varchar(16) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `isexception` tinyint(1) NOT NULL DEFAULT '0',
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   `attendees` text COLLATE utf8mb4_bin,
   `notifyat` datetime DEFAULT NULL,
   `caldav_url` varchar(1000) COLLATE utf8mb4_bin NOT NULL,
-  `caldav_tag` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `caldav_tag` varchar(32) COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `caldav_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`event_id`),
   KEY `caldav_uid_idx` (`uid`),
