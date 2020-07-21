@@ -24,8 +24,8 @@
         }
     ],
 	"config": {
-		"vendor-dir": "/../../plugins/calendar/lib",
-		"bin-dir": "/../../plugins/calendar/lib"
+		"vendor-dir": "lib/",
+		"bin-dir": "lib/"
 	},
     "require": {
         "php": ">=7.0.0",
