@@ -1,12 +1,4 @@
-/**
- * Roundcube Calendar Kolab backend
- *
- * @author Gene Hawkins <texxasrulez@yahoo.com>
- * @author Sergey Sidlyarenko
- * @licence GNU AGPL
- **/
-
-CREATE TABLE IF NOT EXISTS IF NOT EXISTS `kolab_alarms` (
+CREATE TABLE IF NOT EXISTS `kolab_alarms` (
   `alarm_id` VARCHAR(255) NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `notifyat` DATETIME DEFAULT NULL,
@@ -16,7 +8,7 @@ CREATE TABLE IF NOT EXISTS IF NOT EXISTS `kolab_alarms` (
     REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
 
-CREATE TABLE IF NOT EXISTS IF NOT EXISTS `itipinvitations` (
+CREATE TABLE IF NOT EXISTS `itipinvitations` (
   `token` VARCHAR(64) NOT NULL,
   `event_uid` VARCHAR(255) NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
