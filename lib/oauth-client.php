@@ -22,7 +22,7 @@
  */
 
 require_once (dirname(__FILE__).'/../../../vendor/autoload.php');
-require_once (dirname(__FILE__).'/oauth-token-storage.php');
+// require_once (dirname(__FILE__).'/oauth-token-storage.php');
 
 use League\OAuth2\Server;
 use League\OAuth2\Client;

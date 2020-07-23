@@ -19,11 +19,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-require_once (dirname(__FILE__).'/caldav_sync.php');
-require_once (dirname(__FILE__).'/../../lib/encryption.php');
-require_once (dirname(__FILE__).'/../../lib/oauth-client.php');
-class caldav_driver extends calendar_driver
-{
+ 
+	require_once (dirname(__FILE__).'/caldav_sync.php');
+	require_once (dirname(__FILE__).'/../../lib/encryption.php');
+//	require_once (dirname(__FILE__).'/../../lib/oauth-client.php');
+
+	class caldav_driver extends calendar_driver
+	{
     const DB_DATE_FORMAT = 'Y-m-d H:i:s';
     public static $scheduling_properties = array('start', 'end', 'allday', 'recurrence', 'location', 'cancelled');
     // features this backend supports
