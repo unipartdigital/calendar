@@ -23,9 +23,15 @@
             "role": "Developer"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git://github.com/texxasrulez/calendar.git"
+        }
+    ],
 	"config": {
-		"vendor-dir": "lib/",
-		"bin-dir": "lib/"
+		"vendor-dir": "./lib/",
+		"bin-dir": "./lib/"
 	},
     "require": {
         "php": ">=7.0.0",
@@ -33,7 +39,7 @@
         "texxasrulez/libkolab": "*",
         "league/oauth2-client": "*",
         "league/oauth2-google": "*",
-        "sabre/dav": "3.1.0",
+        "sabre/dav": "~4.1.0",
         "sabre/vobject": "*",
         "sabre/event" : "*",
         "sabre/xml"  : "*",
@@ -49,8 +55,10 @@
         "psr-4": {
             "League\\OAuth2\\Client\\": "src/",
             "League\\OAuth2\\Google\\": "src/",
-            "Sabre\\Dav\\Client\\": "lib/",
-            "Sabre\\Http\\Client\\": "lib/"
+            "Sabre\\DAV\\"            : "lib/DAV/",
+            "Sabre\\DAV\\Property\\"  : "lib/DAV/Xml/Property",
+            "Sabre\\DAVACL\\"         : "lib/DAVACL/",
+            "Sabre\\CalDAV\\"         : "lib/CalDAV/"
         }
     },
     "minimum-stability": "dev"

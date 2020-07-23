@@ -55,9 +55,10 @@ class caldav_sync
         // CalDAV client auth
         $username = isset($cal["caldav_user"]) ? $cal["caldav_user"] : null;
         $pass = isset($cal["caldav_pass"]) ? $cal["caldav_pass"] : null;
-        $auth_type = isset($cal["caldav_auth_type"]) ? $cal["caldav_auth_type"] : null;
+        $oauth_client = isset($cal["caldav_oauth_provider"]) && $cal["caldav_oauth_provider"] ?
+            new oauth_client(rcmail::get_instance(), $cal["caldav_oauth_provider"]) : null;
         
-        $this->caldav = new caldav_client($this->url, $username, $pass, $auth_type);
+        $this->caldav = new caldav_client($this->url, $username, $pass, $oauth_client);
     }
 
     /**

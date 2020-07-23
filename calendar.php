@@ -957,7 +957,7 @@ if(count($cals) > 0){
 
       $p['blocks']['birthdays']['options']['birthday_adressbooks'] = array(
         'title'   => rcube::Q($this->gettext('birthdayscalendarsources')),
-        'content' => html::tag('ul', 'proplist', implode("\r\n", $sources)),
+        'content' => html::tag('ul', 'proplist', implode("\n", $sources)),
       );
 
       $field_id = 'rcmfd_birthdays_alarm';
@@ -2995,8 +2995,8 @@ if(count($cals) > 0){
       $response['append'] = array(
         'selector' => '.calendar-agenda-preview',
         'replacements' => array(
-          '%before%' => !empty($before) ? join("\r\n", array_slice($before,  -3)) : html::div('event-row no-event', $this->gettext('noearlierevents')),
-          '%after%'  => !empty($after)  ? join("\r\n", array_slice($after, 0, 3)) : html::div('event-row no-event', $this->gettext('nolaterevents')),
+          '%before%' => !empty($before) ? join("\n", array_slice($before,  -3)) : html::div('event-row no-event', $this->gettext('noearlierevents')),
+          '%after%'  => !empty($after)  ? join("\n", array_slice($after, 0, 3)) : html::div('event-row no-event', $this->gettext('nolaterevents')),
         ),
       );
     }

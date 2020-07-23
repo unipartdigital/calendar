@@ -88,6 +88,27 @@ class caldav_driver extends calendar_driver
             self::$debug = $this->rc->config->get('calendar_caldav_debug', False);
         $this->_read_calendars();
     }
+	
+	protected function getObjectNameAndType(array $objectData) {
+		$vObject = Reader::read($objectData['calendardata']);
+		$component = $componentType = null;
+		foreach ($vObject->getComponents() as $component) {
+			if (in_array($component->name, ['VEVENT', 'VTODO'])) {
+				$componentType = $component->name;
+				break;
+			}
+		}
+
+		if (!$componentType) {
+			// Calendar objects must have a VEVENT or VTODO component
+			return false;
+		}
+
+		if ($componentType === 'VEVENT') {
+			return ['id' => (string) $component->UID, 'name' => (string) $component->SUMMARY, 'type' => 'event'];
+		}
+		return ['id' => (string) $component->UID, 'name' => (string) $component->SUMMARY, 'type' => 'todo', 'status' => (string) $component->STATUS];
+	}
 
     /**
      * Read available calendars for the current user and store them internally
@@ -251,6 +272,7 @@ class caldav_driver extends calendar_driver
         );
         // Change password if specified
         if (isset($cal["caldav_pass"])) {
+	    $cal = $this->_expand_pass($cal);
             $query = $this->rc->db->query("UPDATE " . $this->db_calendars . "
             SET   caldav_pass=?
             WHERE calendar_id=?
@@ -330,6 +352,7 @@ class caldav_driver extends calendar_driver
                 if (isset($event["caldav_tag"]) || ($event = $sync_client->create_event($event)) !== false) {
                     if ($event_id = $this->_insert_event($event)) {
                         $this->_update_recurring($event);
+                        return true;
                     }
                 }
             }
@@ -345,8 +368,7 @@ class caldav_driver extends calendar_driver
         //$event = $this->_save_preprocess($event);
         $this->rc->db->query(sprintf(
             "INSERT INTO " . $this->db_events . "
-       (calendar_id, created, changed, uid, recurrence_id, instance, isexception, %s, %s, all_day, recurrence,
-          title, description, location, categories, url, free_busy, priority, sensitivity, status, attendees, alarms, notifyat,
+       (calendar_id, created, changed, uid, recurrence_id, instance, isexception, %s, %s, all_day, recurrence, title, description, location, categories, url, free_busy, priority, sensitivity, status, attendees, alarms, notifyat,
           caldav_url, caldav_tag)
        VALUES (?, %s, %s, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             $this->rc->db->quote_identifier('start'),
@@ -753,9 +775,9 @@ class caldav_driver extends calendar_driver
             $sql_set[] = 'calendar_id=' . $this->rc->db->quote($event['calendar']);
         $query = $this->rc->db->query(sprintf(
             "UPDATE " . $this->db_events . "
-       SET   changed=%s %s
-       WHERE event_id=?
-       AND   calendar_id IN (" . $this->calendar_ids . ")",
+				SET   changed=%s %s
+				WHERE event_id=?
+				AND   calendar_id IN (" . $this->calendar_ids . ")",
             $this->rc->db->now(),
             ($sql_set ? ', ' . join(', ', $sql_set) : '')
         ),
@@ -767,6 +789,13 @@ class caldav_driver extends calendar_driver
             foreach ($event['attachments'] as $attachment) {
                 $this->add_attachment($attachment, $event['id']);
                 unset($attachment);
+            }
+        }
+
+        // remove attachments
+        if ($success && !empty($event['deleted_attachments'])) {
+            foreach ($event['deleted_attachments'] as $attachment) {
+                $this->remove_attachment($attachment, $event['id']);
             }
         }
         if ($success) {
@@ -1448,7 +1477,7 @@ class caldav_driver extends calendar_driver
             $attendees = json_decode($s_attendees, true);
         } // decode the old serialization format
         else {
-            foreach (explode("\r\n", $event['attendees']) as $line) {
+            foreach (explode("\n", $event['attendees']) as $line) {
                 $att = array();
                 foreach (rcube_utils::explode_quoted_string(';', $line) as $prop) {
                     list($key, $value) = explode("=", $prop);
@@ -1563,7 +1592,7 @@ class caldav_driver extends calendar_driver
         if(isset($calendar["caldav_oauth_provider"]) && ($provider = oauth_client::get_provider($calendar["caldav_oauth_provider"]) !== false)){
             array_push($oauth2_buttons, new html_inputfield(array(
                 "type" => "button",
-                "class" => "button",
+                "class" => "propform",
                 "onclick" => "", // TODO: Do s.th.
                 "value" => $this->cal->gettext("logout_from").$provider["name"]
             )));
@@ -1586,7 +1615,7 @@ class caldav_driver extends calendar_driver
         if (is_array($hidden_fields)) {
             foreach ($hidden_fields as $field) {
                 $hiddenfield = new html_hiddenfield($field);
-                $this->form_html .= $hiddenfield->show() . "\r\n";
+                $this->form_html .= $hiddenfield->show() . "\n";
             }
         }
         // Create form output
@@ -1596,7 +1625,7 @@ class caldav_driver extends calendar_driver
                 foreach ($tab['fieldsets'] as $fieldset) {
                     $subcontent = $this->get_form_part($fieldset);
                     if ($subcontent) {
-                        $content .= html::tag('fieldset', null, html::tag('legend', null, rcube::Q($fieldset['name'])) . $subcontent) ."\r\n";
+                        $content .= html::tag('fieldset', null, html::tag('legend', null, rcube::Q($fieldset['name'])) . $subcontent) ."\n";
                     }
                 }
             }
@@ -1604,7 +1633,7 @@ class caldav_driver extends calendar_driver
                 $content = $this->get_form_part($tab);
             }
             if ($content) {
-                $this->form_html .= html::tag('fieldset', null, html::tag('legend', null, rcube::Q($tab['name'])) . $content) ."\r\n";
+                $this->form_html .= html::tag('fieldset', null, html::tag('legend', null, rcube::Q($tab['name'])) . $content) ."\n";
             }
         }
         // Parse form template for skin-dependent stuff
