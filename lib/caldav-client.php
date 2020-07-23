@@ -24,7 +24,6 @@
 
 require_once (dirname(__FILE__).'/../../../vendor/autoload.php');
 
-
 class caldav_client extends Sabre\DAV\Client
 {
     const CLARK_GETCTAG = '{http://calendarserver.org/ns/}getctag';
@@ -204,9 +203,9 @@ class caldav_client extends Sabre\DAV\Client
         $parent_tag = sizeof($event_urls) > 0 ? "c:calendar-multiget" : "d:propfind";
         $method = sizeof($event_urls) > 0 ? 'REPORT' : 'PROPFIND';
 
-        $body = '<?xml version="1.0"?>'."\n".'<'.$parent_tag.' xmlns:d="DAV:" xmlns:c="urn:ietf:params:xml:ns:caldav">'."\n";
+        $body = '<?xml version="1.0"?>'."\r\n".'<'.$parent_tag.' xmlns:d="DAV:" xmlns:c="urn:ietf:params:xml:ns:caldav">'."\r\n";
 
-        $body .= '  <d:prop>'."\n";
+        $body .= '  <d:prop>'."\r\n";
         foreach ($properties as $property)
         {
 
@@ -214,33 +213,33 @@ class caldav_client extends Sabre\DAV\Client
 
             if ($namespace === 'DAV:')
             {
-                $body .= '    <d:'.$elementName.' />'."\n";
+                $body .= '    <d:'.$elementName.' />'."\r\n";
             }
             else
             {
-                $body .= '    <x:'.$elementName.' xmlns:x="'.$namespace.'"/>'."\n";
+                $body .= '    <x:'.$elementName.' xmlns:x="'.$namespace.'"/>'."\r\n";
             }
         }
-        $body .= '  </d:prop>'."\n";
+        $body .= '  </d:prop>'."\r\n";
 
         // http://tools.ietf.org/html/rfc4791#page-90
         // http://www.bedework.org/trac/bedework/wiki/Bedework/DevDocs/Filters
         /*
          if($start && $end)
          {
-         $body.= '  <c:filter>'."\n".
-         '    <c:comp-filter name="VCALENDAR">'."\n".
-         '      <c:comp-filter name="VEVENT">'."\n".
-         '        <c:time-range start="'.$start.'" end="'.$end.'" />'."\n".
-         '      </c:comp-filter>'."\n".
-         '    </c:comp-filter>'."\n".
-         '  </c:filter>' . "\n";
+         $body.= '  <c:filter>'."\r\n".
+         '    <c:comp-filter name="VCALENDAR">'."\r\n".
+         '      <c:comp-filter name="VEVENT">'."\r\n".
+         '        <c:time-range start="'.$start.'" end="'.$end.'" />'."\r\n".
+         '      </c:comp-filter>'."\r\n".
+         '    </c:comp-filter>'."\r\n".
+         '  </c:filter>' . "\r\n";
          }
          */
 
         foreach ($event_urls as $event_url)
         {
-            $body .= '<d:href>'.$event_url.'</d:href>'."\n";
+            $body .= '<d:href>'.$event_url.'</d:href>'."\r\n";
         }
 
         $body .= '</'.$parent_tag.'>';

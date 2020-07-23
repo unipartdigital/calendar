@@ -21,14 +21,11 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once (dirname(__FILE__).'/vendor/autoload.php');
+require_once (dirname(__FILE__).'/../../../vendor/autoload.php');
 
-use fkooman\OAuth\Common\Scope;
-use fkooman\OAuth\Client\AccessToken;
-use fkooman\OAuth\Client\RefreshToken;
-use fkooman\OAuth\Client\State;
-use fkooman\OAuth\Client\Context;
-use fkooman\OAuth\Client\StorageInterface;
+use League\OAuth2\Server;
+use League\OAuth2\Client;
+use League\OAuth2\Google;
 
 class oauth_token_storage implements StorageInterface
 {
