@@ -28,7 +28,11 @@
             "type": "vcs",
             "url": "git://github.com/texxasrulez/calendar.git"
         }
-    ],
+    ],"funding": [
+        {
+            "type": "patreon",
+            "url": "https://paypal.me/texxasrulez"}
+		],
 	"config": {
 		"vendor-dir": "./lib/",
 		"bin-dir": "./lib/"
@@ -64,11 +68,6 @@
             "Sabre\\CalDAV\\"         : "lib/CalDAV/",
             "Sabre\\HTTP\\"           : "lib/HTTP/"
         }
-    }
+    },
     "minimum-stability": "dev"
-    "funding": [
-        {
-            "type": "patreon",
-            "url": "https://paypal.me/texxasrulez"}
-		]
 }
