@@ -64,13 +64,11 @@
             "Sabre\\CalDAV\\"         : "lib/CalDAV/",
             "Sabre\\HTTP\\"           : "lib/HTTP/"
         }
-    },
-	{
+    }
+    "minimum-stability": "dev"
     "funding": [
         {
             "type": "patreon",
             "url": "https://paypal.me/texxasrulez"}
 		]
-	},
-    "minimum-stability": "dev"
 }
