@@ -25,9 +25,12 @@ require_once (dirname(__FILE__).'/../../../vendor/autoload.php');
 
 use League\OAuth2\Server;
 use League\OAuth2\Client;
+use League\OAuth2\Client\Token\AccessToken;
+use League\OAuth2\Client\Token\AccessTokenInterface;
+use League\OAuth2\Client\Grant\AuthorizationCode;
 use League\OAuth2\Google;
 
-class oauth_token_storage implements StorageInterface
+class oauth_token_storage implements JsonSerializable
 {
     private $db;
     private $provider;

@@ -20,12 +20,12 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
  
-	require_once (dirname(__FILE__).'/caldav_sync.php');
-	require_once (dirname(__FILE__).'/../../lib/encryption.php');
-//	require_once (dirname(__FILE__).'/../../lib/oauth-client.php');
+require_once (dirname(__FILE__).'/caldav_sync.php');
+require_once (dirname(__FILE__).'/../../lib/encryption.php');
+// require_once (dirname(__FILE__).'/../../lib/oauth-client.php');
 
-	class caldav_driver extends calendar_driver
-	{
+class caldav_driver extends calendar_driver
+{
     const DB_DATE_FORMAT = 'Y-m-d H:i:s';
     public static $scheduling_properties = array('start', 'end', 'allday', 'recurrence', 'location', 'cancelled');
     // features this backend supports
@@ -50,7 +50,7 @@
     // Holds CalDAV sync clients
     private $sync_clients = array();
     // Min. time period to wait until CalDAV sync check.
-    private $sync_period;
+    private $sync_period = 10; // seconds
     // Indicates debug mode for CalDAV
     static private $debug = null;
     /**
@@ -69,7 +69,6 @@
         self::debug_log($msg);
         $this->rc->output->show_message($msg, 'error');
     }
-
     /**
      * Default constructor
      */
@@ -84,34 +83,11 @@
         $this->db_calendars = $this->rc->config->get('db_table_caldav_calendars', $db->table_name($this->db_calendars));
         $this->db_attachments = $this->rc->config->get('db_table_caldav_attachments', $db->table_name($this->db_attachments));
         $this->crypt_key = $this->rc->config->get("calendar_crypt_key", "%E`c{2;<J2F^4_&._BxfQ<5Pf3qv!m{e");
-        $this->sync_period = $this->rc->config->get("calendar_sync_period");
         // Set debug state
         if(self::$debug === null)
             self::$debug = $this->rc->config->get('calendar_caldav_debug', False);
         $this->_read_calendars();
     }
-	
-	protected function getObjectNameAndType(array $objectData) {
-		$vObject = Reader::read($objectData['calendardata']);
-		$component = $componentType = null;
-		foreach ($vObject->getComponents() as $component) {
-			if (in_array($component->name, ['VEVENT', 'VTODO'])) {
-				$componentType = $component->name;
-				break;
-			}
-		}
-
-		if (!$componentType) {
-			// Calendar objects must have a VEVENT or VTODO component
-			return false;
-		}
-
-		if ($componentType === 'VEVENT') {
-			return ['id' => (string) $component->UID, 'name' => (string) $component->SUMMARY, 'type' => 'event'];
-		}
-		return ['id' => (string) $component->UID, 'name' => (string) $component->SUMMARY, 'type' => 'todo', 'status' => (string) $component->STATUS];
-	}
-
     /**
      * Read available calendars for the current user and store them internally
      */
@@ -192,7 +168,6 @@
                 // Respect $props['name'] if only a single calendar was found e.g. no auto-discovery.
                 if(sizeof($calendars) > 1 || !isset($cal['name'])  || $cal['name'] == "")
                     $cal['name'] = $calendar['name'];
-					$cal['color'] = $calendar['color'];
                 if (($obj_id = $this->_db_create_calendar($cal)) !== false) {
                     array_push($cal_ids, $obj_id);
                 } else $result = false;
@@ -225,14 +200,7 @@
      */
     private function _db_create_calendar($prop)
     {
-        // randomize color of calendars on creation
-        if (!isset($prop['color'])) {
-            $color=bin2hex(random_bytes(3));
-            $prop['color']=$color;
-        }
-		
         $prop = $this->_expand_pass($prop);
-		
         $result = $this->rc->db->query(
             "INSERT INTO " . $this->db_calendars . "
        (user_id, name, color, showalarms, caldav_url, caldav_tag, caldav_user, caldav_pass, caldav_oauth_provider)
@@ -274,7 +242,6 @@
         );
         // Change password if specified
         if (isset($cal["caldav_pass"])) {
-	    $cal = $this->_expand_pass($cal);
             $query = $this->rc->db->query("UPDATE " . $this->db_calendars . "
             SET   caldav_pass=?
             WHERE calendar_id=?
@@ -354,7 +321,6 @@
                 if (isset($event["caldav_tag"]) || ($event = $sync_client->create_event($event)) !== false) {
                     if ($event_id = $this->_insert_event($event)) {
                         $this->_update_recurring($event);
-                        return true;
                     }
                 }
             }
@@ -370,7 +336,8 @@
         //$event = $this->_save_preprocess($event);
         $this->rc->db->query(sprintf(
             "INSERT INTO " . $this->db_events . "
-       (calendar_id, created, changed, uid, recurrence_id, instance, isexception, %s, %s, all_day, recurrence, title, description, location, categories, url, free_busy, priority, sensitivity, status, attendees, alarms, notifyat,
+       (calendar_id, created, changed, uid, recurrence_id, instance, isexception, %s, %s, all_day, recurrence,
+          title, description, location, categories, url, free_busy, priority, sensitivity, status, attendees, alarms, notifyat,
           caldav_url, caldav_tag)
        VALUES (?, %s, %s, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             $this->rc->db->quote_identifier('start'),
@@ -679,42 +646,41 @@
     {
         // shift dates to server's timezone (except for all-day events)
         if (!$event['allday']) {
-
-	    $orig_weekday = $event['start']->format('N');
+			$orig_weekday = $event['start']->format('U');
             $event['start'] = clone $event['start'];
             $event['start']->setTimezone($this->server_timezone);
             $event['end'] = clone $event['end'];
             $event['end']->setTimezone($this->server_timezone);
-	    $weekday = $event['start']->format('N');
-	    if($orig_weekday != $weekday && !empty($event['recurrence']['BYDAY'])) {
-		$weekdays = array(
-		    'MO' => 0,
-		    'TU' => 1,
-		    'WE' => 2,
-		    'TH' => 3,
-		    'FR' => 4,
-		    'SA' => 5,
-		    'SU' => 6,
-		);
-        $vcaldays = array('MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU');
-		$vcaldays[$orig_weekday-1];
-		if ($weekday > $orig_weekday) {
-		    for ($i = 0; $i < $weekday - $orig_weekday; $i++) {
-			array_push($vcaldays, array_shift($vcaldays));
-		    }
-		} else {
-		    for ($i = 0; $i < $orig_weekday - $weekday; $i++) {
-			array_unshift($vcaldays, array_pop($vcaldays));
-		    }
-		}
-		$byday = "";
-                foreach (explode(',', $event['recurrence']['BYDAY']) as $day) {
-		    $byday .= ($byday == "" ? "" : ",").$vcaldays[$weekdays[$day]];
-		}
-		$event['recurrence']['BYDAY'] = $byday;
-	    }
+		$weekday = $event['start']->format('N');
+  	    if($orig_weekday != $weekday && !empty($event['recurrence']['BYDAY'])) {
+  		$weekdays = array(
+  		    'MO' => 0,
+  		    'TU' => 1,
+  		    'WE' => 2,
+  		    'TH' => 3,
+  		    'FR' => 4,
+  		    'SA' => 5,
+  		    'SU' => 6,
+  		);
+                  $vcaldays = array('MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU');
+  		$vcaldays[$orig_weekday-1];
+  		if ($weekday > $orig_weekday) {
+ 		    for ($i = 0; $i < $weekday - $orig_weekday; $i++) {
+  			array_push($vcaldays, array_shift($vcaldays));
+  		    }
+  		} else {
+  		    for ($i = 0; $i < $orig_weekday - $weekday; $i++) {
+  			array_unshift($vcaldays, array_pop($vcaldays));
+  		    }
+  		}
+  
+  		$byday = "";
+                  foreach (explode(',', $event['recurrence']['BYDAY']) as $day) {
+  		    $byday .= ($byday == "" ? "" : ",").$vcaldays[$weekdays[$day]];
+  		}
+  		$event['recurrence']['BYDAY'] = $byday;
+  	    }
         }
-		
         // compose vcalendar-style recurrencue rule from structured data
         $rrule = $event['recurrence'] ? libcalendaring::to_rrule($event['recurrence']) : '';
         $event['_recurrence'] = rtrim($rrule, ';');
@@ -777,9 +743,9 @@
             $sql_set[] = 'calendar_id=' . $this->rc->db->quote($event['calendar']);
         $query = $this->rc->db->query(sprintf(
             "UPDATE " . $this->db_events . "
-				SET   changed=%s %s
-				WHERE event_id=?
-				AND   calendar_id IN (" . $this->calendar_ids . ")",
+       SET   changed=%s %s
+       WHERE event_id=?
+       AND   calendar_id IN (" . $this->calendar_ids . ")",
             $this->rc->db->now(),
             ($sql_set ? ', ' . join(', ', $sql_set) : '')
         ),
@@ -791,13 +757,6 @@
             foreach ($event['attachments'] as $attachment) {
                 $this->add_attachment($attachment, $event['id']);
                 unset($attachment);
-            }
-        }
-
-        // remove attachments
-        if ($success && !empty($event['deleted_attachments'])) {
-            foreach ($event['deleted_attachments'] as $attachment) {
-                $this->remove_attachment($attachment, $event['id']);
             }
         }
         if ($success) {
@@ -1594,7 +1553,7 @@
         if(isset($calendar["caldav_oauth_provider"]) && ($provider = oauth_client::get_provider($calendar["caldav_oauth_provider"]) !== false)){
             array_push($oauth2_buttons, new html_inputfield(array(
                 "type" => "button",
-                "class" => "propform",
+                "class" => "button",
                 "onclick" => "", // TODO: Do s.th.
                 "value" => $this->cal->gettext("logout_from").$provider["name"]
             )));
@@ -1784,7 +1743,6 @@
      *   caldav_pass: Password
      * @return False on error or an array with the following calendar props:
      *    name: Calendar display name
-	 *    color: Calendar color
      *    href: Absolute calendar URL
      */
     private function _autodiscover_calendars($props)
@@ -1792,7 +1750,7 @@
         $calendars = array();
         $current_user_principal = array('{DAV:}current-user-principal');
         $calendar_home_set = array('{urn:ietf:params:xml:ns:caldav}calendar-home-set');
-        $cal_attribs = array('{DAV:}resourcetype', '{DAV:}displayname', '{http://apple.com/ns/ical/}calendar-color');
+        $cal_attribs = array('{DAV:}resourcetype', '{DAV:}displayname');
         $oauth_client = (isset($props["caldav_oauth_provider"]) && $props["caldav_oauth_provider"]) ? new oauth_client($this->rc, $props["caldav_oauth_provider"]) : null;
         if (!class_exists('caldav_client')) {
         	require_once ($this->cal->home.'/lib/caldav-client.php');
@@ -1813,14 +1771,9 @@
             $name = '';
             if (array_key_exists ('{DAV:}displayname', $response)) {
                 $name = $response['{DAV:}displayname'];
-			}
-            if (array_key_exists ('{http://apple.com/ns/ical/}calendar-color', $response)) {
-                $color = $response['{http://apple.com/ns/ical/}calendar-color'];
-                $color = substr( substr( $color, 1 ), 0, 6);
             }
             array_push($calendars, array(
                 'name' => $name,
-                'color' => $color,
                 'href' => $caldav_url,
             ));
             return $calendars;
@@ -1859,15 +1812,10 @@
                 else if ($key == '{DAV:}displayname') {
                     $name = $value;
                 }
-                if ($key == '{http://apple.com/ns/ical/}calendar-color') {
-                    $color = $value;
-                    $color = substr( substr( $color, 1 ), 0, 6);
-                }
             }
             if ($found) {
                 array_push($calendars, array(
                     'name' => $name,
-                    'color' => $color,
                     'href' => $base_uri.$collection,
                 ));
             }
