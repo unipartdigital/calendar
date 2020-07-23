@@ -28,7 +28,8 @@
             "type": "vcs",
             "url": "git://github.com/texxasrulez/calendar.git"
         }
-    ],"funding": [
+    ],
+	"funding": [
         {
             "type": "patreon",
             "url": "https://paypal.me/texxasrulez"}
@@ -44,12 +45,12 @@
         "league/oauth2-server": "*",
         "league/oauth2-client": "*",
         "league/oauth2-google": "*",
-        "sabre/dav": "3.1.0",
-        "sabre/vobject": "3.3.5",
-        "sabre/event" : "~2.0",
-        "sabre/xml"  : "~1.0",
-        "sabre/http" : "~4.0",
-        "sabre/uri" : "~1.0"
+        "sabre/dav": "~4.1.0",
+        "sabre/vobject": "*",
+        "sabre/event" : "*",
+        "sabre/xml"  : "*",
+        "sabre/http" : "*",
+        "sabre/uri" : "*"
     },
     "require-dev" : {
         "phpunit/phpunit": "^4.8.36 || ^5.7.21",
