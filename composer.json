@@ -37,6 +37,7 @@
         "php": ">=7.0.0",
         "texxasrulez/libcalendaring": "*",
         "texxasrulez/libkolab": "*",
+        "league/oauth2-server": "*",
         "league/oauth2-client": "*",
         "league/oauth2-google": "*",
         "sabre/dav": "~4.1.0",
