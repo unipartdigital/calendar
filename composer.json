@@ -54,6 +54,7 @@
     },
     "autoload": {
         "psr-4": {
+            "League\\OAuth2\\Server\\": "src/",
             "League\\OAuth2\\Client\\": "src/",
             "League\\OAuth2\\Google\\": "src/",
             "Sabre\\DAV\\Client\\"    : "lib/",
