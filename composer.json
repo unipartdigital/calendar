@@ -67,7 +67,8 @@
             "Sabre\\DAV\\Property\\"  : "lib/DAV/Xml/Property",
             "Sabre\\DAVACL\\"         : "lib/DAVACL/",
             "Sabre\\CalDAV\\"         : "lib/CalDAV/",
-            "Sabre\\HTTP\\"           : "lib/HTTP/"
+            "Sabre\\HTTP\\"           : "lib/",
+			"Sabre\\HTTP\\ClientHttpException" : "lib/"
         }
     },
     "minimum-stability": "dev"
