@@ -59,16 +59,16 @@
     },
     "autoload": {
         "psr-4": {
-            "League\\OAuth2\\Server\\": "src/",
-            "League\\OAuth2\\Client\\": "src/",
-            "League\\OAuth2\\Google\\": "src/",
-            "Sabre\\DAV\\Client\\"    : "lib/",
-            "Sabre\\DAV\\"            : "lib/DAV/",
-            "Sabre\\DAV\\Property\\"  : "lib/DAV/Xml/Property",
-            "Sabre\\DAVACL\\"         : "lib/DAVACL/",
-            "Sabre\\CalDAV\\"         : "lib/CalDAV/",
-            "Sabre\\HTTP\\"           : "lib/",
-			"Sabre\\HTTP\\ClientHttpException" : "lib/"
+            "League\\OAuth2\\Server\\"				: "src/",
+            "League\\OAuth2\\Client\\"				: "src/",
+            "League\\OAuth2\\Google\\"				: "src/",
+            "Sabre\\DAV\\Client\\"    				: "lib/",
+            "Sabre\\DAV\\"            				: "lib/DAV/",
+            "Sabre\\DAV\\Property\\"  				: "lib/DAV/Xml/Property",
+            "Sabre\\DAVACL\\"         				: "lib/DAVACL/",
+            "Sabre\\CalDAV\\"         				: "lib/CalDAV/",
+            "Sabre\\HTTP\\"           				: "lib/",
+			"Sabre\\HTTP\\ClientHttpException\\" 	: "lib/"
         }
     },
     "minimum-stability": "dev"
