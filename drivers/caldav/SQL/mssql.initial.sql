@@ -1,8 +1,7 @@
 /**
- * iCAL Client
+ * CalDAV Client
  *
- * @author Gene Hawkins <texxasrulez@yahoo.com>
- * @version @package-version@
+ * @version @package_version@
  * @author Daniel Morlock <daniel.morlock@awesome-it.de>
  *
  * Copyright (C) Awesome IT GbR <info@awesome-it.de>
@@ -21,30 +20,30 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-CREATE TABLE ical_calendars (
+CREATE TABLE caldav_calendars (
   [calendar_id] int CHECK ([calendar_id] > 0) NOT NULL IDENTITY,
   [user_id] int CHECK ([user_id] > 0) NOT NULL DEFAULT '0',
   [name] varchar(255) NOT NULL,
   [color] varchar(8) NOT NULL,
   [showalarms] smallint NOT NULL DEFAULT '1',
 
-  [ical_url] varchar(1000) NOT NULL,
-  [ical_tag] varchar(255) DEFAULT NULL,
-  [ical_user] varchar(255) DEFAULT NULL,
-  [ical_pass] varchar(1024) DEFAULT NULL,
-  [ical_oauth_provider] varchar(255) DEFAULT NULL,
+  [caldav_url] varchar(1000) NOT NULL,
+  [caldav_tag] varchar(255) DEFAULT NULL,
+  [caldav_user] varchar(255) DEFAULT NULL,
+  [caldav_pass] varchar(1024) DEFAULT NULL,
+  [caldav_oauth_provider] varchar(255) DEFAULT NULL,
   [readonly] int NOT NULL DEFAULT '0',
-  [ical_last_change] datetime2(0) NOT NULL DEFAULT GETDATE(),
+  [caldav_last_change] datetime2(0) NOT NULL DEFAULT GETDATE(),
 
   PRIMARY KEY([calendar_id])
  ,
-  CONSTRAINT [rc_ical_calendars_user_id] FOREIGN KEY ([user_id])
+  CONSTRAINT [rc_caldav_calendars_user_id] FOREIGN KEY ([user_id])
   REFERENCES users([user_id]) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
 
-CREATE INDEX [ical_user_name_idx] ON ical_calendars ([user_id], [name]);
+CREATE INDEX [caldav_user_name_idx] ON caldav_calendars ([user_id], [name]);
 
-CREATE TABLE ical_events (
+CREATE TABLE caldav_events (
   [event_id] int CHECK ([event_id] > 0) NOT NULL IDENTITY,
   [calendar_id] int CHECK ([calendar_id] > 0) NOT NULL DEFAULT '0',
   [recurrence_id] int CHECK ([recurrence_id] > 0) NOT NULL DEFAULT '0',
@@ -56,10 +55,10 @@ CREATE TABLE ical_events (
   [sequence] int CHECK ([sequence] > 0) NOT NULL DEFAULT '0',
   [start] datetime2(0) NOT NULL DEFAULT '1000-01-01 00:00:00',
   [end] datetime2(0) NOT NULL DEFAULT '1000-01-01 00:00:00',
-  [recurrence] varchar(255) DEFAULT NULL,
+  [recurrence] varchar(1000) DEFAULT NULL,
   [title] varbinary(128) NOT NULL,
-  [description] varbinary(128) NOT NULL,
-  [location] varchar(255) NOT NULL DEFAULT '',
+  [description] varbinary(2048) NOT NULL,
+  [location] varbinary(2048) NOT NULL DEFAULT '',
   [categories] varchar(255) NOT NULL DEFAULT '',
   [url] varchar(255) NOT NULL DEFAULT '',
   [all_day] smallint NOT NULL DEFAULT '0',
@@ -71,21 +70,21 @@ CREATE TABLE ical_events (
   [attendees] varchar(max) DEFAULT NULL,
   [notifyat] datetime2(0) DEFAULT NULL,
 
-  [ical_url] varchar(255) NOT NULL,
-  [ical_tag] varchar(255) DEFAULT NULL,
-  [ical_last_change] datetime2(0) NOT NULL DEFAULT GETDATE(),
+  [caldav_url] varchar(1000) NOT NULL,
+  [caldav_tag] varchar(255) DEFAULT NULL,
+  [caldav_last_change] datetime2(0) NOT NULL DEFAULT GETDATE(),
 
   PRIMARY KEY([event_id])
  ,
-  CONSTRAINT [rc_ical_events_calendar_id] FOREIGN KEY ([calendar_id])
-  REFERENCES ical_calendars([calendar_id]) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT [rc_caldav_events_calendar_id] FOREIGN KEY ([calendar_id])
+  REFERENCES caldav_calendars([calendar_id]) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
 
-CREATE INDEX [ical_uid_idx] ON ical_events ([uid]);
-CREATE INDEX [ical_recurrence_idx] ON ical_events ([recurrence_id]);
-CREATE INDEX [ical_calendar_notify_idx] ON ical_events ([calendar_id],[notifyat]);
+CREATE INDEX [caldav_uid_idx] ON caldav_events ([uid]);
+CREATE INDEX [caldav_recurrence_idx] ON caldav_events ([recurrence_id]);
+CREATE INDEX [caldav_calendar_notify_idx] ON caldav_events ([calendar_id],[notifyat]);
 
-CREATE TABLE ical_attachments (
+CREATE TABLE caldav_attachments (
   [attachment_id] int CHECK ([attachment_id] > 0) NOT NULL IDENTITY,
   [event_id] int CHECK ([event_id] > 0) NOT NULL DEFAULT '0',
   [filename] varchar(255) NOT NULL DEFAULT '',
@@ -93,8 +92,8 @@ CREATE TABLE ical_attachments (
   [size] int NOT NULL DEFAULT '0',
   [data] varchar(max) NOT NULL,
   PRIMARY KEY([attachment_id]),
-  CONSTRAINT [rc_ical_attachments_event_id] FOREIGN KEY ([event_id])
-  REFERENCES ical_events([event_id]) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT [rc_caldav_attachments_event_id] FOREIGN KEY ([event_id])
+  REFERENCES caldav_events([event_id]) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
 
-REPLACE INTO `system` ([name], [value]) SELECT ('texxasrulez-ical-version', '2020072000');
+REPLACE INTO `system` ([name], [value]) SELECT ('texxasrulez-calendar-caldav-version', '2020072000');

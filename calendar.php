@@ -3844,7 +3844,7 @@ if(count($cals) > 0){
     }
     else {
       // fallback to libcalendaring (Horde-based) recurrence implementation
-      require_once(__DIR__ . '/lib/calendar_recurrence.php');
+      require_once(dirname (__FILE__).'/lib/calendar_recurrence.php');
       $recurrence = new calendar_recurrence($this, $event);
     }
 

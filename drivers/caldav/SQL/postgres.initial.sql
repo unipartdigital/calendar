@@ -1,8 +1,7 @@
 /**
- * iCAL Client
+ * CalDAV Client
  *
- * @author Gene Hawkins <texxasrulez@yahoo.com>
- * @version @package-version@
+ * @version @package_version@
  * @author Daniel Morlock <daniel.morlock@awesome-it.de>
  *
  * Copyright (C) Awesome IT GbR <info@awesome-it.de>
@@ -21,35 +20,35 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-CREATE SEQUENCE ical_calendars_seq;
+CREATE SEQUENCE caldav_calendars_seq;
 
-CREATE TABLE IF NOT EXISTS ical_calendars (
-  calendar_id int CHECK (calendar_id > 0) NOT NULL DEFAULT NEXTVAL ('ical_calendars_seq'),
+CREATE TABLE IF NOT EXISTS caldav_calendars (
+  calendar_id int CHECK (calendar_id > 0) NOT NULL DEFAULT NEXTVAL ('caldav_calendars_seq'),
   user_id int CHECK (user_id > 0) NOT NULL DEFAULT '0',
   name varchar(255) NOT NULL,
   color varchar(8) NOT NULL,
   showalarms smallint NOT NULL DEFAULT '1',
 
-  ical_url varchar(1000) NOT NULL,
-  ical_tag varchar(255) DEFAULT NULL,
-  ical_user varchar(255) DEFAULT NULL,
-  ical_pass varchar(1024) DEFAULT NULL,
-  ical_oauth_provider varchar(255) DEFAULT NULL,
+  caldav_url varchar(1000) NOT NULL,
+  caldav_tag varchar(255) DEFAULT NULL,
+  caldav_user varchar(255) DEFAULT NULL,
+  caldav_pass varchar(1024) DEFAULT NULL,
+  caldav_oauth_provider varchar(255) DEFAULT NULL,
   readonly int NOT NULL DEFAULT '0',
-  ical_last_change timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  caldav_last_change timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY(calendar_id)
  ,
-  CONSTRAINT rc_ical_calendars_user_id FOREIGN KEY (user_id)
+  CONSTRAINT rc_caldav_calendars_user_id FOREIGN KEY (user_id)
   REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
 
-CREATE INDEX ical_user_name_idx ON ical_calendars (user_id, name);
+CREATE INDEX caldav_user_name_idx ON caldav_calendars (user_id, name);
 
-CREATE SEQUENCE ical_events_seq;
+CREATE SEQUENCE caldav_events_seq;
 
-CREATE TABLE IF NOT EXISTS ical_events (
-  event_id int CHECK (event_id > 0) NOT NULL DEFAULT NEXTVAL ('ical_events_seq'),
+CREATE TABLE IF NOT EXISTS caldav_events (
+  event_id int CHECK (event_id > 0) NOT NULL DEFAULT NEXTVAL ('caldav_events_seq'),
   calendar_id int CHECK (calendar_id > 0) NOT NULL DEFAULT '0',
   recurrence_id int CHECK (recurrence_id > 0) NOT NULL DEFAULT '0',
   uid varchar(255) NOT NULL DEFAULT '',
@@ -60,10 +59,10 @@ CREATE TABLE IF NOT EXISTS ical_events (
   sequence int CHECK (sequence > 0) NOT NULL DEFAULT '0',
   start timestamp(0) NOT NULL DEFAULT '1000-01-01 00:00:00',
   end timestamp(0) NOT NULL DEFAULT '1000-01-01 00:00:00',
-  recurrence varchar(255) DEFAULT NULL,
+  recurrence varchar(1000) DEFAULT NULL,
   title bytea NOT NULL,
   description bytea NOT NULL,
-  location varchar(255) NOT NULL DEFAULT '',
+  location bytea NOT NULL DEFAULT '',
   categories varchar(255) NOT NULL DEFAULT '',
   url varchar(255) NOT NULL DEFAULT '',
   all_day smallint NOT NULL DEFAULT '0',
@@ -75,32 +74,32 @@ CREATE TABLE IF NOT EXISTS ical_events (
   attendees text DEFAULT NULL,
   notifyat timestamp(0) DEFAULT NULL,
 
-  ical_url varchar(255) NOT NULL,
-  ical_tag varchar(255) DEFAULT NULL,
-  ical_last_change timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  caldav_url varchar(1000) NOT NULL,
+  caldav_tag varchar(255) DEFAULT NULL,
+  caldav_last_change timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY(event_id)
  ,
-  CONSTRAINT rc_ical_events_calendar_id FOREIGN KEY (calendar_id)
-  REFERENCES ical_calendars(calendar_id) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT rc_caldav_events_calendar_id FOREIGN KEY (calendar_id)
+  REFERENCES caldav_calendars(calendar_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
 
-CREATE INDEX ical_uid_idx ON ical_events (uid);
-CREATE INDEX ical_recurrence_idx ON ical_events (recurrence_id);
-CREATE INDEX ical_calendar_notify_idx ON ical_events (calendar_id,notifyat);
+CREATE INDEX caldav_uid_idx ON caldav_events (uid);
+CREATE INDEX caldav_recurrence_idx ON caldav_events (recurrence_id);
+CREATE INDEX caldav_calendar_notify_idx ON caldav_events (calendar_id,notifyat);
 
-CREATE SEQUENCE ical_attachments_seq;
+CREATE SEQUENCE caldav_attachments_seq;
 
-CREATE TABLE IF NOT EXISTS ical_attachments (
-  attachment_id int CHECK (attachment_id > 0) NOT NULL DEFAULT NEXTVAL ('ical_attachments_seq'),
+CREATE TABLE IF NOT EXISTS caldav_attachments (
+  attachment_id int CHECK (attachment_id > 0) NOT NULL DEFAULT NEXTVAL ('caldav_attachments_seq'),
   event_id int CHECK (event_id > 0) NOT NULL DEFAULT '0',
   filename varchar(255) NOT NULL DEFAULT '',
   mimetype varchar(255) NOT NULL DEFAULT '',
   size int NOT NULL DEFAULT '0',
   data longtext NOT NULL,
   PRIMARY KEY(attachment_id),
-  CONSTRAINT rc_ical_attachments_event_id FOREIGN KEY (event_id)
-  REFERENCES ical_events(event_id) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT rc_caldav_attachments_event_id FOREIGN KEY (event_id)
+  REFERENCES caldav_events(event_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
 
-REPLACE INTO `system` (name, value) SELECT ('texxasrulez-ical-version', '2020072000');
+REPLACE INTO `system` (name, value) SELECT ('texxasrulez-calendar-caldav-version', '2020072000');
