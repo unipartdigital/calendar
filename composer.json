@@ -25,7 +25,7 @@
     ],
     "repositories": [
         {
-            "type": "composer",
+            "type": "vcs",
             "url": "git://github.com/texxasrulez/calendar.git"
         }
     ],
