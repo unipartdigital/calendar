@@ -26,7 +26,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "git://github.com/texxasrulez/calendar.git"
+            "url": "git://github.com/texxasrulez/roundcube_caldav_calendar.git"
         }
     ],
 	"funding": [
