@@ -1,75 +1,88 @@
 {
-    "name": "texxasrulez/calendar",
-    "type": "composer-plugin",
-    "description": "CalDav Capable Calendar plugin for Roundcube and Nextcloud",
-    "homepage": "https://github.com/texxasrulez/roundcube_caldav_calendar",
-    "license": "GPL-3.0+",
-    "version": "1.0",
-    "authors": [
+	"name": "texxasrulez/calendar",
+	"type": "composer-plugin",
+	"description": "CalDav Capable Calendar plugin for Roundcube and Nextcloud",
+	"homepage": "https://github.com/texxasrulez/roundcube_caldav_calendar",
+	"license": "GPL-3.0+",
+	"version": "1.0",
+	"authors": [
 		{
-            "name": "Gene Hawkins",
-            "email": "texxasrulez@yahoo.com",
+			"name": "Gene Hawkins",
+			"email": "texxasrulez@yahoo.com",
 			"homepage": "https://www.genesworld.net",
-            "role": "Developer"
-        },
+			"role": "Developer"
+		},
 		{
-            "name": "Thomas Bruederli",
-            "email": "bruederli@kolabsys.com",
-            "role": "Lead"
-        },
-        {
-            "name": "Aleksander Machniak",
-            "email": "machniak@kolabsys.com",
-            "role": "Developer"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git://github.com/texxasrulez/roundcube_caldav_calendar.git"
-        }
-    ],
+			"name": "Thomas Bruederli",
+			"email": "bruederli@kolabsys.com",
+			"role": "Lead"
+		},
+		{
+			"name": "Aleksander Machniak",
+			"email": "machniak@kolabsys.com",
+			"role": "Developer"
+		}
+	],
+	"repositories": [
+		{
+			"type": "git",
+			"url": "https://github.com/texxasrulez/roundcube_caldav_calendar.git"
+		}
+	],
 	"funding": [
-        {
-            "type": "patreon",
-            "url": "https://paypal.me/texxasrulez"}
-		],
+		{
+			"type": "patreon",
+			"url": "https://paypal.me/texxasrulez"
+		}
+	],
 	"config": {
 		"vendor-dir": "./lib/vendor/",
 		"bin-dir": "./lib/vendor/bin/"
 	},
-    "require": {
-        "php": ">=7.1.0",
-        "texxasrulez/libcalendaring": "*",
-        "texxasrulez/libkolab": "*",
-        "league/oauth2-server": "*",
-        "league/oauth2-client": "*",
-        "league/oauth2-google": "*",
-        "sabre/dav": "~4.1.0",
-        "sabre/vobject": "*",
-        "sabre/event" : "*",
-        "sabre/xml"  : "*",
-        "sabre/http" : "*",
-        "sabre/uri" : "*"
-    },
-    "require-dev" : {
-        "phpunit/phpunit": "^4.8.36 || ^5.7.21",
-        "evert/phpdoc-md" : "~0.1.0",
-        "monolog/monolog": "^1.18"
-    },
-    "autoload": {
-        "psr-4": {
-            "Sabre\\CalDAV\\"         				: "lib/CalDAV/",
-            "Sabre\\DAV\\Client\\"    				: "lib/",
-            "Sabre\\DAV\\"            				: "lib/DAV/",
-            "Sabre\\DAV\\Property\\"  				: "lib/DAV/Xml/Property",
-            "Sabre\\DAVACL\\"         				: "lib/DAVACL/",
-            "Sabre\\HTTP\\"           				: "lib/",
-			"Sabre\\HTTP\\ClientHttpException\\" 	: "lib/",
-            "League\\OAuth2\\Server\\"				: "src/",
-            "League\\OAuth2\\Client\\"				: "src/",
-            "League\\OAuth2\\Google\\"				: "src/"
-        }
-    },
-    "minimum-stability": "dev"
+	"require": {
+		"php": ">=7.1.0",
+		"texxasrulez/libcalendaring": "*",
+		"texxasrulez/libkolab": "*",
+		"league/oauth2-server": "*",
+		"league/oauth2-client": "*",
+		"league/oauth2-google": "*",
+		"sabre/dav": "~4.1.0",
+		"sabre/vobject": "*",
+		"sabre/event": "*",
+		"sabre/xml": "*",
+		"sabre/http": "*",
+		"sabre/uri": "*"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^4.8.36 || ^5.7.21",
+		"evert/phpdoc-md": "~0.1.0",
+		"monolog/monolog": "^1.18"
+	},
+	"autoload": {
+		"psr-4": {
+			"Sabre\\CalDAV\\": "lib/CalDAV/",
+			"Sabre\\DAV\\Client\\": "lib/",
+			"Sabre\\DAV\\": "lib/DAV/",
+			"Sabre\\DAV\\Property\\": "lib/DAV/Xml/Property",
+			"Sabre\\DAVACL\\": "lib/DAVACL/",
+			"Sabre\\HTTP\\": "lib/",
+			"Sabre\\HTTP\\ClientHttpException\\": "lib/",
+			"League\\OAuth2\\Server\\": "src/",
+			"League\\OAuth2\\Client\\": "src/",
+			"League\\OAuth2\\Google\\": "src/"
+		}
+	},
+	"extra": {
+		"roundcube": {
+			"min-version": "1.4.0",
+			"sql-dir": "drivers/caldav/SQL"
+		}
+	},
+	"extra": {
+		"roundcube": {
+			"min-version": "1.4.0",
+			"sql-dir": "drivers/caldav/SQL"
+		}
+	},
+	"minimum-stability": "dev"
 }
