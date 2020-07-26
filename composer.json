@@ -34,8 +34,12 @@
             "type": "patreon",
             "url": "https://paypal.me/texxasrulez"}
 		],
+	"config": {
+		"vendor-dir": "lib/vendor/",
+		"bin-dir": "lib/bin/"
+	},
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=7.1.0",
         "texxasrulez/libcalendaring": "*",
         "texxasrulez/libkolab": "*",
         "league/oauth2-server": "*",
