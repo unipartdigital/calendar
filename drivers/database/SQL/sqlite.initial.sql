@@ -3,7 +3,6 @@
  *
  * Plugin to add a calendar to Roundcube.
  *
- * @author Gene Hawkins <texxasrulez@yahoo.com>
  * @author Lazlo Westerhof
  * @author Thomas Bruederli
  * @author Albert Lee
@@ -13,17 +12,17 @@
  *
  **/
 
-CREATE TABLE IF NOT EXISTS calendars (
+CREATE TABLE calendars (
   calendar_id integer NOT NULL PRIMARY KEY,
   user_id integer NOT NULL default '0',
   name varchar(255) NOT NULL default '',
   color varchar(255) NOT NULL default '',
   showalarms tinyint(1) NOT NULL default '1',
-  CONSTRAINT rc_calendars_user_id FOREIGN KEY (user_id)
+  CONSTRAINT fk_calendars_user_id FOREIGN KEY (user_id)
     REFERENCES users(user_id)
 );
 
-CREATE TABLE IF NOT EXISTS events (
+CREATE TABLE events (
   event_id integer NOT NULL PRIMARY KEY,
   calendar_id integer NOT NULL default '0',
   recurrence_id integer NOT NULL default '0',
@@ -36,7 +35,7 @@ CREATE TABLE IF NOT EXISTS events (
   start datetime NOT NULL default '1000-01-01 00:00:00',
   end datetime NOT NULL default '1000-01-01 00:00:00',
   recurrence varchar(255) default NULL,
-  title varbinary(128) NOT NULL,
+  title varchar(255) NOT NULL,
   description text NOT NULL,
   location varchar(255) NOT NULL default '',
   categories varchar(255) NOT NULL default '',
@@ -49,32 +48,32 @@ CREATE TABLE IF NOT EXISTS events (
   alarms text default NULL,
   attendees text default NULL,
   notifyat datetime default NULL,
-  CONSTRAINT rc_events_calendar_id FOREIGN KEY (calendar_id)
+  CONSTRAINT fk_events_calendar_id FOREIGN KEY (calendar_id)
     REFERENCES calendars(calendar_id)
 );
 
-CREATE TABLE IF NOT EXISTS attachments (
+CREATE TABLE attachments (
   attachment_id integer NOT NULL PRIMARY KEY,
   event_id integer NOT NULL default '0',
   filename varchar(255) NOT NULL default '',
   mimetype varchar(255) NOT NULL default '',
   size integer NOT NULL default '0',
   data text NOT NULL default '',
-  CONSTRAINT rc_attachment_event_id FOREIGN KEY (event_id)
+  CONSTRAINT fk_attachment_event_id FOREIGN KEY (event_id)
     REFERENCES events(event_id)
 );
 
-CREATE TABLE IF NOT EXISTS itipinvitations (
+CREATE TABLE itipinvitations (
   token varchar(64) NOT NULL PRIMARY KEY,
   event_uid varchar(255) NOT NULL,
   user_id integer NOT NULL default '0',
   event text NOT NULL,
   expires datetime NOT NULL default '1000-01-01 00:00:00',
   cancelled tinyint(1) NOT NULL default '0',
-  CONSTRAINT rc_itipinvitations_user_id FOREIGN KEY (user_id)
+  CONSTRAINT fk_itipinvitations_user_id FOREIGN KEY (user_id)
     REFERENCES users(user_id)
 );
 
 CREATE INDEX ix_itipinvitations_uid ON itipinvitations(user_id, event_uid);
 
-INSERT INTO system (name, value) VALUES ('texxasrulez-caldav-version', '2020072000'');
+INSERT INTO system (name, value) VALUES ('calendar-database-version', '2015022700');

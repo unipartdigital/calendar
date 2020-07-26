@@ -19,10 +19,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+ 
 require_once (dirname(__FILE__).'/caldav_sync.php');
 require_once (dirname(__FILE__).'/../../lib/encryption.php');
-require_once (dirname(__FILE__).'/../../lib/oauth-client.php');
+// require_once (dirname(__FILE__).'/../../lib/oauth_client.php');
+
 class caldav_driver extends calendar_driver
+
 {
     const DB_DATE_FORMAT = 'Y-m-d H:i:s';
     public static $scheduling_properties = array('start', 'end', 'allday', 'recurrence', 'location', 'cancelled');
@@ -1771,9 +1774,10 @@ class caldav_driver extends calendar_driver
         $cal_attribs = array('{DAV:}resourcetype', '{DAV:}displayname', '{http://apple.com/ns/ical/}calendar-color');
         $oauth_client = (isset($props["caldav_oauth_provider"]) && $props["caldav_oauth_provider"]) ? new oauth_client($this->rc, $props["caldav_oauth_provider"]) : null;
         if (!class_exists('caldav_client')) {
-        	require_once ($this->cal->home.'/lib/caldav-client.php');
+        	require_once ($this->cal->home.'/lib/caldav_client.php');
         }
-        $caldav = new caldav_client($props["caldav_url"], $props["caldav_user"], $props["caldav_pass"]);
+        $auth_type = isset($props["caldav_auth_type"]) ? $props["caldav_auth_type"] : null;
+        $caldav = new caldav_client($props["caldav_url"], $props["caldav_user"], $props["caldav_pass"], $auth_type);
         $tokens = parse_url($props["caldav_url"]);
         $base_uri = $tokens['scheme']."://".$tokens['host'].($tokens['port'] ? ":".$tokens['port'] : null);
         $caldav_url = $props["caldav_url"];
@@ -1826,7 +1830,7 @@ class caldav_driver extends calendar_driver
             foreach($attribs as $key => $value)
             {
                 if ($key == '{DAV:}resourcetype' && is_object($value)) {
-                    if ($value instanceof Sabre\DAV\Property\ResourceType || $value instanceof Sabre\DAV\Xml\Property\ResourceType) {
+                    if ($value instanceof Sabre\DAV\Xml\Property\ResourceType || $value instanceof Sabre\DAV\Xml\Property\ResourceType) {
                         $values = $value->getValue();
                         if (in_array('{urn:ietf:params:xml:ns:caldav}calendar', $values))
                             $found = true;

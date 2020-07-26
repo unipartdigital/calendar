@@ -26,6 +26,7 @@ require_once realpath(__DIR__ . '/../../libcalendaring/lib/libcalendaring_itip.p
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+ 
 class calendar_itip extends libcalendaring_itip
 {
   /**

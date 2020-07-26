@@ -225,11 +225,12 @@ $config['calendar_oauth_providers'] = array(
 // Caldav driver is supported only
  $config['calendar_preinstalled_calendars'] = array(
     'Nextcloud' => array(
-                    'driver'       => 'caldav',
-					'name'         => '',
-                    'caldav_user'  => '%u',
-                    'caldav_pass'  => '%p',
-                    'caldav_url'   => 'https://www.domain.ltd/nextcloud/remote.php/dav/calendars/%u/',
-					'color' 	   =>  '',
-                    'showAlarms'   => 1));
+                    'driver'       		=> 'caldav',
+					'name'         		=> '',
+                    'caldav_user'  		=> '%u',
+                    'caldav_pass'  		=> '%p',
+					'caldav_auth_type'  => '', // Authentication choices are 'basic' or 'digest'
+                    'caldav_url'   		=> 'https://www.%d/nextcloud/remote.php/dav/calendars/%u/',
+					'color' 	   		=>  '', // Can specify color using hex or leave blank for auto color
+                    'showAlarms'   		=> 1));
 ?>

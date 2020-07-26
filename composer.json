@@ -34,10 +34,6 @@
             "type": "patreon",
             "url": "https://paypal.me/texxasrulez"}
 		],
-	"config": {
-		"vendor-dir": "./lib/",
-		"bin-dir": "./lib/"
-	},
     "require": {
         "php": ">=7.0.0",
         "texxasrulez/libcalendaring": "*",
@@ -45,7 +41,7 @@
         "league/oauth2-server": "*",
         "league/oauth2-client": "*",
         "league/oauth2-google": "*",
-        "sabre/dav": "~3.0.9",
+        "sabre/dav": "~4.1.0",
         "sabre/vobject": "*",
         "sabre/event" : "*",
         "sabre/xml"  : "*",

@@ -1,6 +1,13 @@
-/**
+/*
  * CalDAV Client
  *
+ * Forked and Currently maintained by Gene
+ *
+ * @version @package_version@
+ * @author Gene Hawkins <texxasrulez@yahoo.com>
+ * @website https://www.genesworld.net
+ *
+ * Original Author Credits
  * @version @package_version@
  * @author Daniel Morlock <daniel.morlock@awesome-it.de>
  *
@@ -27,19 +34,18 @@ CREATE TABLE IF NOT EXISTS `caldav_calendars` (
   `color` varchar(8) NOT NULL,
   `showalarms` tinyint(1) NOT NULL DEFAULT '1',
 
-  `caldav_url` varchar(1000) NOT NULL,
+  `caldav_url` varchar(255) NOT NULL,
   `caldav_tag` varchar(255) DEFAULT NULL,
   `caldav_user` varchar(255) DEFAULT NULL,
   `caldav_pass` varchar(1024) DEFAULT NULL,
-  `caldav_oauth_provider` varchar(255) DEFAULT NULL,
-  `readonly` int NOT NULL DEFAULT '0',
+  `caldav_oauth_provider` varbinary(200) DEFAULT NULL,
   `caldav_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY(`calendar_id`),
   INDEX `caldav_user_name_idx` (`user_id`, `name`),
-  CONSTRAINT `rc_caldav_calendars_user_id` FOREIGN KEY (`user_id`)
+  CONSTRAINT `fk_caldav_calendars_user_id` FOREIGN KEY (`user_id`)
   REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
 CREATE TABLE IF NOT EXISTS `caldav_events` (
   `event_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -53,10 +59,10 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   `sequence` int(1) UNSIGNED NOT NULL DEFAULT '0',
   `start` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `end` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
-  `recurrence` varchar(1000) DEFAULT NULL,
+  `recurrence` varchar(255) DEFAULT NULL,
   `title` varbinary(128) NOT NULL,
   `description` varbinary(2048) NOT NULL,
-  `location` varbinary(2048) NOT NULL DEFAULT '',
+  `location` varchar(255) NOT NULL DEFAULT '',
   `categories` varchar(255) NOT NULL DEFAULT '',
   `url` varchar(255) NOT NULL DEFAULT '',
   `all_day` tinyint(1) NOT NULL DEFAULT '0',
@@ -68,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   `attendees` text DEFAULT NULL,
   `notifyat` datetime DEFAULT NULL,
 
-  `caldav_url` varchar(1000) NOT NULL,
+  `caldav_url` varchar(255) NOT NULL,
   `caldav_tag` varchar(255) DEFAULT NULL,
   `caldav_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
@@ -76,9 +82,9 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   INDEX `caldav_uid_idx` (`uid`),
   INDEX `caldav_recurrence_idx` (`recurrence_id`),
   INDEX `caldav_calendar_notify_idx` (`calendar_id`,`notifyat`),
-  CONSTRAINT `rc_caldav_events_calendar_id` FOREIGN KEY (`calendar_id`)
+  CONSTRAINT `fk_caldav_events_calendar_id` FOREIGN KEY (`calendar_id`)
   REFERENCES `caldav_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
 CREATE TABLE IF NOT EXISTS `caldav_attachments` (
   `attachment_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -88,8 +94,24 @@ CREATE TABLE IF NOT EXISTS `caldav_attachments` (
   `size` int(11) NOT NULL DEFAULT '0',
   `data` longtext NOT NULL,
   PRIMARY KEY(`attachment_id`),
-  CONSTRAINT `rc_caldav_attachments_event_id` FOREIGN KEY (`event_id`)
+  CONSTRAINT `fk_caldav_attachments_event_id` FOREIGN KEY (`event_id`)
   REFERENCES `caldav_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
-REPLACE INTO `system` (`name`, `value`) VALUES ('texxasrulez-calendar-caldav-version', '2020072000');
+CREATE TABLE IF NOT EXISTS `caldav_props` (
+  `obj_id` int(11) NOT NULL,
+  `obj_type` enum('vcal','vevent','vtodo','') NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `tag` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `pass` varchar(1024) DEFAULT NULL,
+  UNIQUE KEY `obj_id` (`obj_id`,`obj_type`)
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+
+UPDATE `caldav_events` SET `instance` = DATE_FORMAT(`start`, '%Y%m%d')
+  WHERE `recurrence_id` != 0 AND `instance` = '' AND `all_day` = 1;
+
+UPDATE `caldav_events` SET `instance` = DATE_FORMAT(`start`, '%Y%m%dT%k%i%s')
+  WHERE `recurrence_id` != 0 AND `instance` = '' AND `all_day` = 0;
+
+REPLACE INTO `system` (`name`, `value`) VALUES ('te-calendar-caldav-version', '2020080100');
