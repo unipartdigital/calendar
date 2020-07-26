@@ -25,7 +25,7 @@
     ],
     "repositories": [
         {
-            "type": "vcs",
+            "type": "composer",
             "url": "git://github.com/texxasrulez/calendar.git"
         }
     ],
@@ -35,8 +35,8 @@
             "url": "https://paypal.me/texxasrulez"}
 		],
 	"config": {
-		"vendor-dir": "lib/vendor/",
-		"bin-dir": "lib/bin/"
+		"vendor-dir": "./lib/vendor/",
+		"bin-dir": "./lib/vendor/bin/"
 	},
     "require": {
         "php": ">=7.1.0",
@@ -59,16 +59,16 @@
     },
     "autoload": {
         "psr-4": {
-            "League\\OAuth2\\Server\\"				: "src/",
-            "League\\OAuth2\\Client\\"				: "src/",
-            "League\\OAuth2\\Google\\"				: "src/",
+            "Sabre\\CalDAV\\"         				: "lib/CalDAV/",
             "Sabre\\DAV\\Client\\"    				: "lib/",
             "Sabre\\DAV\\"            				: "lib/DAV/",
             "Sabre\\DAV\\Property\\"  				: "lib/DAV/Xml/Property",
             "Sabre\\DAVACL\\"         				: "lib/DAVACL/",
-            "Sabre\\CalDAV\\"         				: "lib/CalDAV/",
             "Sabre\\HTTP\\"           				: "lib/",
-			"Sabre\\HTTP\\ClientHttpException\\" 	: "lib/"
+			"Sabre\\HTTP\\ClientHttpException\\" 	: "lib/",
+            "League\\OAuth2\\Server\\"				: "src/",
+            "League\\OAuth2\\Client\\"				: "src/",
+            "League\\OAuth2\\Google\\"				: "src/"
         }
     },
     "minimum-stability": "dev"
