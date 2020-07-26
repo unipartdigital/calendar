@@ -1,6 +1,6 @@
 {
     "name": "texxasrulez/calendar",
-    "type": "roundcube-plugin",
+    "type": "composer-plugin",
     "description": "CalDav Capable Calendar plugin for Roundcube and Nextcloud",
     "homepage": "https://github.com/texxasrulez/roundcube_caldav_calendar",
     "license": "GPL-3.0+",
