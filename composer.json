@@ -40,11 +40,5 @@
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*",
 		"fxp/composer-asset-plugin": "*"
-	},
-	"extra": {
-		"roundcube": {
-			"min-version": "1.4.0",
-			"sql-dir": "drivers/caldav/SQL"
-		}
 	}
 }
