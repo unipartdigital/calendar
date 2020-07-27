@@ -26,7 +26,7 @@
 	"repositories": [
 		{
 			"type": "git",
-			"url": "https://github.com/texxasrulez/roundcube_caldav_calendar"
+			"url": "https://github.com/texxasrulez/roundcube_caldav_calendar.git"
 		}
 	],
 	"funding": [
@@ -54,7 +54,7 @@
 		"evert/phpdoc-md": "~0.1.0",
 		"monolog/monolog": "^1.18"
 	},
-    "suggest": {
+	"suggest": {
 		"roundcube/carddav": "v4.x-dev"
 	},
 	"autoload": {
