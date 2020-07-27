@@ -25,8 +25,8 @@
 	],
 	"repositories": [
 		{
-			"type": "git",
-			"url": "https://github.com/texxasrulez/roundcube_caldav_calendar.git"
+			"type": "composer",
+			"url": "https://github.com/texxasrulez/roundcube_caldav_calendar"
 		}
 	],
 	"funding": [
@@ -35,10 +35,6 @@
 			"url": "https://paypal.me/texxasrulez"
 		}
 	],
-	"config": {
-		"vendor-dir": "./lib/vendor/",
-		"bin-dir": "./lib/vendor/bin/"
-	},
 	"require": {
 		"php": ">=7.1.0",
 		"texxasrulez/libcalendaring": "*",

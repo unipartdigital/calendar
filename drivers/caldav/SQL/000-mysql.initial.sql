@@ -5,7 +5,7 @@
  *
  * @version @package_version@
  * @author Gene Hawkins <texxasrulez@yahoo.com>
- * @website https://www.genesworld.net
+ * @website <https://www.genesworld.net>
  *
  * Original Author Credits
  * @version @package_version@
