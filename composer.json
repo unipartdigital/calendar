@@ -37,11 +37,11 @@
 	],
 	"require": {
 		"php": ">=7.1.0",
-		"texxasrulez/libcalendaring": "*",
-		"texxasrulez/libkolab": "*",
 		"league/oauth2-server": "*",
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*",
+		"texxasrulez/libcalendaring": "*",
+		"texxasrulez/libkolab": "*",
 		"sabre/dav": "~4.1.0",
 		"sabre/vobject": "*",
 		"sabre/event": "*",
