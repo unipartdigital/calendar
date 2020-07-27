@@ -1,11 +1,3 @@
-/**
- * Roundcube CalDav Calendar
- *
- * @author Gene Hawkins <texxasrulez@yahoo.com>
- *
- * @licence GNU AGPL
- **/
-
 CREATE TABLE calendar_oauth_states (
   provider VARCHAR(255) NOT NULL,
   client_config_id VARCHAR(255) NOT NULL,
@@ -38,4 +30,4 @@ CREATE TABLE calendar_oauth_refresh_tokens (
   CONSTRAINT calendar_oauth_refresh_tokens_unique_key UNIQUE (provider, client_config_id, user_id, scope)
 );
 
-INSERT INTO "system" (name, value) VALUES ('texxasrulez-calendar-version', '2020072000');
+INSERT INTO "system" (name, value) VALUES ('calendar-version', '2016011300');

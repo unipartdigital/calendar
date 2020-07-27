@@ -22,7 +22,7 @@
  */
 
 if (!class_exists('caldav_client')) {
-	require_once (dirname(__FILE__).'/../../lib/caldav_client.php');
+	require_once (dirname(__FILE__).'/../../lib/caldav-client.php');
 }
 
 class caldav_sync
@@ -57,9 +57,8 @@ class caldav_sync
         $pass = isset($cal["caldav_pass"]) ? $cal["caldav_pass"] : null;
         $oauth_client = isset($cal["caldav_oauth_provider"]) && $cal["caldav_oauth_provider"] ?
             new oauth_client(rcmail::get_instance(), $cal["caldav_oauth_provider"]) : null;
-        $auth_type = isset($cal["caldav_auth_type"]) ? $cal["caldav_auth_type"] : null;
-        $this->caldav = new caldav_client($this->url, $username, $pass, $auth_type);
-		$this->caldav = new caldav_client($this->url, $username, $pass, $oauth_client);
+        
+        $this->caldav = new caldav_client($this->url, $username, $pass, $oauth_client);
     }
 
     /**

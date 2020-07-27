@@ -1,8 +1,7 @@
 /**
  * iCAL Client
  *
- * @author Gene Hawkins <texxasrulez@yahoo.com>
- * @version @package-version@
+ * @version @package_version@
  * @author Daniel Morlock <daniel.morlock@awesome-it.de>
  *
  * Copyright (C) Awesome IT GbR <info@awesome-it.de>
@@ -28,19 +27,16 @@ CREATE TABLE IF NOT EXISTS `ical_calendars` (
   `color` varchar(8) NOT NULL,
   `showalarms` tinyint(1) NOT NULL DEFAULT '1',
 
-  `ical_url` varchar(1000) NOT NULL,
-  `ical_tag` varchar(255) DEFAULT NULL,
+  `ical_url` varchar(255) NOT NULL,
   `ical_user` varchar(255) DEFAULT NULL,
   `ical_pass` varchar(1024) DEFAULT NULL,
-  `ical_oauth_provider` varchar(255) DEFAULT NULL,
-  `readonly` int NOT NULL DEFAULT '0',
   `ical_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY(`calendar_id`),
   INDEX `ical_user_name_idx` (`user_id`, `name`),
-  CONSTRAINT `rc_ical_calendars_user_id` FOREIGN KEY (`user_id`)
+  CONSTRAINT `fk_ical_calendars_user_id` FOREIGN KEY (`user_id`)
   REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
 CREATE TABLE IF NOT EXISTS `ical_events` (
   `event_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -55,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `ical_events` (
   `start` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `end` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `recurrence` varchar(255) DEFAULT NULL,
-  `title` varbinary(128) NOT NULL,
-  `description` varbinary(128) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
   `location` varchar(255) NOT NULL DEFAULT '',
   `categories` varchar(255) NOT NULL DEFAULT '',
   `url` varchar(255) NOT NULL DEFAULT '',
@@ -70,16 +66,15 @@ CREATE TABLE IF NOT EXISTS `ical_events` (
   `notifyat` datetime DEFAULT NULL,
 
   `ical_url` varchar(255) NOT NULL,
-  `ical_tag` varchar(255) DEFAULT NULL,
   `ical_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY(`event_id`),
   INDEX `ical_uid_idx` (`uid`),
   INDEX `ical_recurrence_idx` (`recurrence_id`),
   INDEX `ical_calendar_notify_idx` (`calendar_id`,`notifyat`),
-  CONSTRAINT `rc_ical_events_calendar_id` FOREIGN KEY (`calendar_id`)
+  CONSTRAINT `fk_ical_events_calendar_id` FOREIGN KEY (`calendar_id`)
   REFERENCES `ical_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
 CREATE TABLE IF NOT EXISTS `ical_attachments` (
   `attachment_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -89,8 +84,8 @@ CREATE TABLE IF NOT EXISTS `ical_attachments` (
   `size` int(11) NOT NULL DEFAULT '0',
   `data` longtext NOT NULL,
   PRIMARY KEY(`attachment_id`),
-  CONSTRAINT `rc_ical_attachments_event_id` FOREIGN KEY (`event_id`)
+  CONSTRAINT `fk_ical_attachments_event_id` FOREIGN KEY (`event_id`)
   REFERENCES `ical_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
-REPLACE INTO `system` (`name`, `value`) VALUES ('te-ical-calendar-version', '2020080100');
+REPLACE INTO `system` (`name`, `value`) VALUES ('calendar-ical-version', '2015022700');

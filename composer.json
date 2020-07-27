@@ -1,10 +1,10 @@
 {
 	"name": "texxasrulez/calendar",
-	"type": "composer-plugin",
+	"type": "roundcube-plugin",
 	"description": "CalDav Capable Calendar plugin for Roundcube and Nextcloud",
-	"homepage": "https://github.com/texxasrulez/roundcube_caldav_calendar",
-	"license": "GPL-3.0+",
-	"version": "0.0.1",
+	"homepage": "https://github.com/texxasrulez/calendar",
+	"license": "GPL-3.0-only",
+	"version": "1.0",
 	"authors": [
 		{
 			"name": "Gene Hawkins",
@@ -25,50 +25,26 @@
 	],
 	"repositories": [
 		{
-            "type": "composer",
-            "url": "https://plugins.roundcube.net"
-		}
-	],
-	"funding": [
-		{
-			"type": "patreon",
-			"url": "https://paypal.me/texxasrulez"
+			"type": "composer",
+			"url": "https://plugins.roundcube.net"
 		}
 	],
 	"require": {
 		"php": ">=7.1.0",
-		"league/oauth2-server": "*",
+		"roundcube/plugin-installer": ">=0.1.3",
+		"texxasrulez/libcalendaring": ">=1.0",
+		"texxasrulez/libkolab": ">=1.0",
+		"sabre/dav": "3.0.9",
+		"sabre/event": "*",
+		"sabre/vobject": "*",
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*",
-		"texxasrulez/libcalendaring": "*",
-		"texxasrulez/libkolab": "*",
-		"sabre/dav": "~4.1.0",
-		"sabre/vobject": "*",
-		"sabre/event": "*",
-		"sabre/xml": "*",
-		"sabre/http": "*",
-		"sabre/uri": "*"
+		"fxp/composer-asset-plugin": "*"
 	},
-	"require-dev": {
-		"phpunit/phpunit": "^4.8.36 || ^5.7.21",
-		"evert/phpdoc-md": "~0.1.0",
-		"monolog/monolog": "^1.18"
-	},
-	"suggest": {
-		"roundcube/carddav": "v4.x-dev"
-	},
-	"autoload": {
-		"psr-4": {
-			"Sabre\\CalDAV\\": "lib/CalDAV/",
-			"Sabre\\DAV\\Client\\": "lib/",
-			"Sabre\\DAV\\": "lib/DAV/",
-			"Sabre\\DAV\\Property\\": "lib/DAV/Xml/Property/",
-			"Sabre\\DAVACL\\": "lib/DAVACL/",
-			"Sabre\\HTTP\\": "lib/",
-			"Sabre\\HTTP\\ClientHttpException\\": "lib/",
-			"League\\OAuth2\\Server\\": "src/",
-			"League\\OAuth2\\Client\\": "src/",
-			"League\\OAuth2\\Google\\": "src/"
+	"extra": {
+		"roundcube": {
+			"min-version": "1.4.0",
+			"sql-dir": "drivers/caldav/SQL"
 		}
 	}
 }

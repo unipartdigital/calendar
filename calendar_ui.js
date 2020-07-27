@@ -622,14 +622,12 @@ function rcube_calendar_ui(settings)
     {
       var cutype = $(this).attr('data-cutype'),
         mailto = this.href.substr(7);
-
       if (rcmail.env.calendar_resources && cutype == 'RESOURCE') {
         event_resources_dialog(mailto);
       }
       else {
         rcmail.command('compose', mailto, e ? e.target : null, e);
       }
-
       return false;
     };
 
