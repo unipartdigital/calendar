@@ -25,8 +25,8 @@
 	],
 	"repositories": [
 		{
-			"type": "git",
-			"url": "https://github.com/texxasrulez/roundcube_caldav_calendar.git"
+            "type": "composer",
+            "url": "https://plugins.roundcube.net"
 		}
 	],
 	"funding": [
@@ -70,6 +70,5 @@
 			"League\\OAuth2\\Client\\": "src/",
 			"League\\OAuth2\\Google\\": "src/"
 		}
-	},
-	"minimum-stability": "dev"
+	}
 }
