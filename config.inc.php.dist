@@ -190,7 +190,7 @@ $config['kolab_invitation_calendars'] = false;
 $config['calendar_freebusy_session_auth_url'] = null;
 
 // Crypt key to encrypt passwords for added iCAL/CalDAV calendars
-$config['calendar_crypt_key'] = "random_24_byte_string";
+// $config['calendar_crypt_key'] = "This is now taken care of through the plugin and uses the randomly generated key from Roundcube des_key during install";
 
 // Enable debugging output for iCAL/CalDAV drivers
 $config['calendar_caldav_debug'] = false;

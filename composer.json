@@ -1,44 +1,56 @@
 {
-	"name": "texxasrulez/calendar",
-	"type": "roundcube-plugin",
-	"description": "CalDav Capable Calendar plugin for Roundcube and Nextcloud",
-	"homepage": "https://github.com/texxasrulez/calendar",
-	"license": "GPL-3.0-only",
-	"version": "1.0",
-	"authors": [
+    "name": "texxasrulez/calendar",
+    "type": "roundcube-plugin",
+    "description": "CalDav Capable Calendar plugin for Roundcube and Nextcloud",
+    "homepage": "https://github.com/texxasrulez/roundcube_caldav_calendar",
+    "license": "GPL-3.0-only",
+    "version": "1.0",
+    "authors": [
 		{
-			"name": "Gene Hawkins",
-			"email": "texxasrulez@yahoo.com",
+            "name": "Gene Hawkins",
+            "email": "texxasrulez@yahoo.com",
 			"homepage": "https://www.genesworld.net",
-			"role": "Developer"
-		},
+            "role": "Developer"
+        },
 		{
-			"name": "Thomas Bruederli",
-			"email": "bruederli@kolabsys.com",
-			"role": "Lead"
-		},
-		{
-			"name": "Aleksander Machniak",
-			"email": "machniak@kolabsys.com",
-			"role": "Developer"
-		}
-	],
-	"repositories": [
-		{
-			"type": "composer",
-			"url": "https://plugins.roundcube.net"
-		}
-	],
-	"require": {
-		"php": ">=7.1.0",
-		"roundcube/plugin-installer": ">=0.1.3",
-		"texxasrulez/libcalendaring": ">=1.0",
-		"texxasrulez/libkolab": ">=1.0",
-		"sabre/dav": "3.0.9",
+            "name": "Thomas Bruederli",
+            "email": "bruederli@kolabsys.com",
+            "role": "Lead"
+        },
+        {
+            "name": "Aleksander Machniak",
+            "email": "machniak@kolabsys.com",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://plugins.roundcube.net"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "roundcube/plugin-installer": ">=0.1.3",
+        "texxasrulez/libcalendaring": ">=1.0",
+        "texxasrulez/libkolab": ">=1.0",
+		"sabre/dav": "*",
 		"sabre/event": "*",
 		"sabre/vobject": "*",
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*",
 		"fxp/composer-asset-plugin": "*"
-	}
+    },
+	"config": {
+		"vendor-dir": "/lib/vendor/"
+	},
+     "extra": {
+        "roundcube": {
+            "min-version": "1.4.0",
+            "sql-dir": "drivers/caldav/SQL",
+		"asset-installer-paths": {
+			"npm-asset-library": "/lib/vendors/league"
+    }
+        }
+    }
 }
