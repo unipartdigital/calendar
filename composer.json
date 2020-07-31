@@ -4,7 +4,7 @@
 	"description": "CalDav Capable Calendar plugin for Roundcube and Nextcloud",
 	"homepage": "https://github.com/texxasrulez/calendar",
 	"license": "GPL-3.0-only",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"authors": [
 		{
 			"name": "Gene Hawkins",
@@ -41,8 +41,10 @@
 		"league/oauth2-google": "*",
 		"fxp/composer-asset-plugin": "*"
 	},
-	"config": {
-		"vendor-dir": "/lib/vendor/"
+	"scripts": {
+		"post-create-project-cmd": [
+			"php -r \"copy('vendor/sabre/vobject/ib/DateTimeParser.php', 'vendor/sabre/vobject/ib/DateTimeParser.php');\""
+		]
 	},
 	"extra": {
 		"roundcube": {
