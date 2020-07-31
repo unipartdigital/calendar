@@ -4,7 +4,7 @@
 	"description": "CalDav Capable Calendar plugin for Roundcube and Nextcloud",
 	"homepage": "https://github.com/texxasrulez/calendar",
 	"license": "GPL-3.0-only",
-	"version": "0.0.4",
+	"version": "0.0.3.1",
 	"authors": [
 		{
 			"name": "Gene Hawkins",
