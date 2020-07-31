@@ -22,7 +22,7 @@
  */
 
 if (!class_exists('caldav_client')) {
-	require_once (dirname(__FILE__).'/../../lib/caldav-client.php');
+	require_once (dirname(__FILE__).'/../../lib/caldav_client.php');
 }
 
 class caldav_sync

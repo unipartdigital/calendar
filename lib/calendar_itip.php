@@ -1,6 +1,6 @@
 <?php
 
-require_once realpath(__DIR__ . '/../../libcalendaring/lib/libcalendaring_itip.php');
+require_once(dirname(__FILE__) . '/../../libcalendaring/lib/libcalendaring_itip.php');
 
 /**
  * iTIP functions for the Calendar plugin

@@ -1,6 +1,6 @@
 <?php
 
-require_once realpath(__DIR__ . '/../../libcalendaring/lib/libcalendaring_recurrence.php');
+require_once(dirname(__FILE__) . '/../../libcalendaring/lib/libcalendaring_recurrence.php');
 
 /**
  * Recurrence computation class for the Calendar plugin

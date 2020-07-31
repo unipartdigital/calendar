@@ -21,12 +21,15 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once (dirname(__FILE__).'/../../../vendor/autoload.php');
-require_once (dirname(__FILE__).'/oauth_token_storage.php');
+require_once (dirname(__FILE__) . '/../../../vendor/autoload.php');
+// require_once (dirname(__FILE__).'/oauth_token_storage.php');
 
-use League\OAuth2\Server;
-use League\OAuth2\Client;
-use League\OAuth2\Google;
+use fkooman\OAuth\Client\GoogleClientConfig;
+use fkooman\OAuth\Client\ClientConfig;
+use fkooman\OAuth\Client\Context;
+use fkooman\OAuth\Client\Api;
+use fkooman\OAuth\Client\Callback;
+use fkooman\OAuth\Client\Guzzle3Client;
 
 class oauth_exception extends Exception
 {
