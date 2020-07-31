@@ -43,7 +43,7 @@
 	},
 	"scripts": {
 		"post-install-cmd": [
-			"php -r \"copy('./vendor/sabre/vobject/lib/DateTimeParser.php', '/../../vendor/sabre/vobject/lib/DateTimeParser.php');\""
+			"php -r \"copy('vendor/sabre/vobject/lib/DateTimeParser.php', '/../vendor/sabre/vobject/lib/DateTimeParser.php');\""
 		]
 	},
 	"extra": {
