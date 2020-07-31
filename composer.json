@@ -43,7 +43,7 @@
 	},
 	"scripts": {
 		"post-create-project-cmd": [
-			"php -r \"copy('vendor/sabre/vobject/ib/DateTimeParser.php', 'vendor/sabre/vobject/ib/DateTimeParser.php');\""
+			"php -r \"copy('vendor/sabre/vobject/lib/DateTimeParser.php', 'vendor/sabre/vobject/lib/DateTimeParser.php');\""
 		]
 	},
 	"extra": {
