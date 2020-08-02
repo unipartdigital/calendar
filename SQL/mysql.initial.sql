@@ -1,32 +1,3 @@
-/*
- * CalDAV Client
- *
- * Forked and Currently maintained by Gene
- *
- * @version @package_version@
- * @author Gene Hawkins <texxasrulez@yahoo.com>
- * @website <https://www.genesworld.net>
- *
- * Original Author Credits
- * @version @package_version@
- * @author Daniel Morlock <daniel.morlock@awesome-it.de>
- *
- * Copyright (C) Awesome IT GbR <info@awesome-it.de>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
-
 CREATE TABLE IF NOT EXISTS `caldav_calendars` (
   `calendar_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -98,4 +69,4 @@ CREATE TABLE IF NOT EXISTS `caldav_attachments` (
   REFERENCES `caldav_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
 
-REPLACE INTO system (name, value) VALUES ('texxasrulez-caldav-version', '2020080100');
+REPLACE INTO system (name, value) VALUES ('tx-calendar-caldav-version', '2020080100');
