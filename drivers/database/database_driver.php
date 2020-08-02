@@ -46,9 +46,9 @@ class database_driver extends calendar_driver
     private $sensitivity_map = array('public' => 0, 'private' => 1, 'confidential' => 2);
     private $server_timezone;
 
-    private $db_events      = 'events';
-    private $db_calendars   = 'calendars';
-    private $db_attachments = 'attachments';
+    private $db_events      = 'database_events';
+    private $db_calendars   = 'database_calendars';
+    private $db_attachments = 'database_attachments';
 
 
     /**
@@ -62,9 +62,9 @@ class database_driver extends calendar_driver
 
         // read database config
         $db = $this->rc->get_dbh();
-        $this->db_events      = $db->table_name($this->rc->config->get('db_table_events', $this->db_events));
-        $this->db_calendars   = $db->table_name($this->rc->config->get('db_table_calendars', $this->db_calendars));
-        $this->db_attachments = $db->table_name($this->rc->config->get('db_table_attachments', $this->db_attachments));
+        $this->db_events      = $db->table_name($this->rc->config->get('db_table_database_events', $this->db_events));
+        $this->db_calendars   = $db->table_name($this->rc->config->get('db_table_database_calendars', $this->db_calendars));
+        $this->db_attachments = $db->table_name($this->rc->config->get('db_table_database_attachments', $this->db_attachments));
 
         $this->_read_calendars();
     }
@@ -348,8 +348,8 @@ class database_driver extends calendar_driver
             $event['id'] = $event_id;
 
             // add attachments
-            if (!empty($event['attachments'])) {
-                foreach ($event['attachments'] as $attachment) {
+            if (!empty($event['database_attachments'])) {
+                foreach ($event['database_attachments'] as $attachment) {
                     $this->add_attachment($attachment, $event_id);
                     unset($attachment);
                 }
@@ -485,7 +485,7 @@ class database_driver extends calendar_driver
                         $recurrence_id_format = libcalendaring::recurrence_id_format($event);
 
                         foreach ($exceptions as $exception) {
-                            $recurrence_id = rcube_utils::anytodatetime($exception['_instance'], $old['start']->getTimezone());
+                            $recurrence_id = rcube_utils::anytodatetime($exception['_instance'], $old['start']->getTimezone($tz));
                             if (is_a($recurrence_id, 'DateTime')) {
                                 $recurrence_id->add($date_shift);
                                 $exception['_instance'] = $recurrence_id->format($recurrence_id_format);
@@ -755,8 +755,8 @@ class database_driver extends calendar_driver
         $success = $this->rc->db->affected_rows($query);
 
         // add attachments
-        if ($success && !empty($event['attachments'])) {
-            foreach ($event['attachments'] as $attachment) {
+        if ($success && !empty($event['database_attachments'])) {
+            foreach ($event['database_attachments'] as $attachment) {
                 $this->add_attachment($attachment, $event['id']);
                 unset($attachment);
             }
@@ -1225,12 +1225,12 @@ class database_driver extends calendar_driver
             $event['_instance'] = $event['instance'];
 
             if (empty($event['recurrence_id'])) {
-                $event['recurrence_date'] = rcube_utils::anytodatetime($event['_instance'], $event['start']->getTimezone());
+                $event['recurrence_date'] = rcube_utils::anytodatetime($event['_instance'], $event['start']->getTimezone($tz));
             }
         }
 
         if ($event['_attachments'] > 0) {
-            $event['attachments'] = (array)$this->list_attachments($event);
+            $event['database_attachments'] = (array)$this->list_attachments($event);
         }
 
         // decode serialized event attendees

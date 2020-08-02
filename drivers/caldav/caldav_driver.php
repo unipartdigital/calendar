@@ -536,7 +536,7 @@ class caldav_driver extends calendar_driver
                         ) {
                             $recurrence_id_format = libcalendaring::recurrence_id_format($event);
                             foreach ($exceptions as $exception) {
-                                $recurrence_id = rcube_utils::anytodatetime($exception['_instance'], $old['start']->getTimezone());
+                                $recurrence_id = rcube_utils::anytodatetime($exception['_instance'], $old['start']->getTimezone($tz));
                                 if (is_a($recurrence_id, 'DateTime')) {
                                     $recurrence_id->add($date_shift);
                                     $exception['_instance'] = $recurrence_id->format($recurrence_id_format);
@@ -1198,7 +1198,7 @@ class caldav_driver extends calendar_driver
         if (strlen($event['instance'])) {
             $event['_instance'] = $event['instance'];
             if (empty($event['recurrence_id'])) {
-                $event['recurrence_date'] = rcube_utils::anytodatetime($event['_instance'], $event['start']->getTimezone());
+                $event['recurrence_date'] = rcube_utils::anytodatetime($event['_instance'], $event['start']->getTimezone($tz));
             }
         }
         if ($event['_attachments'] > 0) {

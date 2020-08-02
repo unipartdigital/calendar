@@ -3492,7 +3492,7 @@ if(count($cals) > 0){
             $master = $this->lib->mail_get_itip_object($mbox, $uid, $mime_id, 'event');
             if ($master['recurrence'] && !$master['_instance']) {
               // compute recurring events until this instance's date
-              if ($recurrence_date = rcube_utils::anytodatetime($instance, $master['start']->getTimezone())) {
+              if ($recurrence_date = rcube_utils::anytodatetime($instance, $master['start']->getTimezone($tz))) {
                 $recurrence_date->setTime(23,59,59);
 
                 foreach ($driver->get_recurring_events($master, $master['start'], $recurrence_date) as $recurring) {
