@@ -11,7 +11,7 @@
  *
  **/
 
-CREATE TABLE IF NOT EXISTS `calendars` (
+CREATE TABLE IF NOT EXISTS `database_calendars` (
   `calendar_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `calendars` (
     REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
-CREATE TABLE IF NOT EXISTS `events` (
+CREATE TABLE IF NOT EXISTS `database_events` (
   `event_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `calendar_id` int(11) UNSIGNED NOT NULL DEFAULT '0',
   `recurrence_id` int(11) UNSIGNED NOT NULL DEFAULT '0',
@@ -54,10 +54,10 @@ CREATE TABLE IF NOT EXISTS `events` (
   INDEX `recurrence_idx` (`recurrence_id`),
   INDEX `calendar_notify_idx` (`calendar_id`,`notifyat`),
   CONSTRAINT `fk_events_calendar_id` FOREIGN KEY (`calendar_id`)
-    REFERENCES `calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
+    REFERENCES `database_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
-CREATE TABLE IF NOT EXISTS `attachments` (
+CREATE TABLE IF NOT EXISTS `database_attachments` (
   `attachment_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `event_id` int(11) UNSIGNED NOT NULL DEFAULT '0',
   `filename` varchar(255) NOT NULL DEFAULT '',
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `attachments` (
   `data` longtext NOT NULL,
   PRIMARY KEY(`attachment_id`),
   CONSTRAINT `fk_attachments_event_id` FOREIGN KEY (`event_id`)
-    REFERENCES `events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
+    REFERENCES `database_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
 CREATE TABLE IF NOT EXISTS `itipinvitations` (
@@ -82,4 +82,4 @@ CREATE TABLE IF NOT EXISTS `itipinvitations` (
     REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
-REPLACE INTO system (name, value) VALUES ('calendar-database-version', '2015022700');
+REPLACE INTO system (name, value) VALUES ('tx-calendar-database-version', '2020080100');
