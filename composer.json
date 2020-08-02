@@ -49,7 +49,7 @@
 	"extra": {
 		"roundcube": {
 			"min-version": "1.4.0",
-			"sql-dir": "drivers/caldav/SQL"
+			"sql-dir": "SQL"
 		}
 	}
 }
