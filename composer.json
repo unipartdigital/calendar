@@ -34,7 +34,7 @@
 		"roundcube/plugin-installer": ">=0.1.3",
 		"texxasrulez/libcalendaring": "*",
 		"texxasrulez/libkolab": "*",
-		"sabre/dav": "3.0.9",
+		"sabre/dav": "4.0",
 		"sabre/event": "*",
 		"sabre/vobject": "*",
 		"league/oauth2-client": "*",
@@ -43,7 +43,7 @@
 	},
 	"scripts": {
 		"post-install-cmd": [
-			"php -r \"copy('/vendor/sabre/vobject/lib/DateTimeParser.php', '/../../vendor/sabre/vobject/lib/DateTimeParser.php');\""
+			"php -r \"copy('/plugins/calendar/vendor/sabre/vobject/lib/DateTimeParser.php', 'vendor/sabre/vobject/lib/DateTimeParser.php');\""
 		]
 	},
 	"extra": {
