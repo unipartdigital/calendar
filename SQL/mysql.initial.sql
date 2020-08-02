@@ -1,6 +1,13 @@
 /*
  * CalDAV Client
  *
+ * Forked and Currently maintained by Gene
+ *
+ * @version @package_version@
+ * @author Gene Hawkins <texxasrulez@yahoo.com>
+ * @website <https://www.genesworld.net>
+ *
+ * Original Author Credits
  * @version @package_version@
  * @author Daniel Morlock <daniel.morlock@awesome-it.de>
  *
@@ -26,12 +33,11 @@ CREATE TABLE IF NOT EXISTS `caldav_calendars` (
   `name` varchar(255) NOT NULL,
   `color` varchar(8) NOT NULL,
   `showalarms` tinyint(1) NOT NULL DEFAULT '1',
-
-  `caldav_url` varchar(1000) NOT NULL,
-  `caldav_tag` varchar(255) DEFAULT NULL,
-  `caldav_user` varchar(255) DEFAULT NULL,
-  `caldav_pass` varchar(1024) DEFAULT NULL,
-  `caldav_oauth_provider` varchar(255) DEFAULT NULL,
+  `caldav_url` varchar(1000) DEFAULT NULL,
+  `caldav_tag` varbinary(32) NOT NULL,
+  `caldav_user` varchar(1000) DEFAULT NULL,
+  `caldav_pass` varchar(1000) DEFAULT NULL,
+  `caldav_oauth_provider` varbinary(200) DEFAULT NULL,
   `readonly` int NOT NULL DEFAULT '0',
   `caldav_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
@@ -39,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `caldav_calendars` (
   INDEX `caldav_user_name_idx` (`user_id`, `name`),
   CONSTRAINT `fk_caldav_calendars_user_id` FOREIGN KEY (`user_id`)
   REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
 
 CREATE TABLE IF NOT EXISTS `caldav_events` (
   `event_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -53,12 +59,12 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   `sequence` int(1) UNSIGNED NOT NULL DEFAULT '0',
   `start` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `end` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
-  `recurrence` varchar(1000) DEFAULT NULL,
-  `title` varchar(255) NOT NULL,
-  `description` text NOT NULL,
+  `recurrence` varchar(255) DEFAULT NULL,
+  `title` varbinary(128) NOT NULL,
+  `description` varbinary(2048) NOT NULL,
   `location` varchar(255) NOT NULL DEFAULT '',
   `categories` varchar(255) NOT NULL DEFAULT '',
-  `url` varchar(255) NOT NULL DEFAULT '',
+  `url` varchar(1000) NOT NULL DEFAULT '',
   `all_day` tinyint(1) NOT NULL DEFAULT '0',
   `free_busy` tinyint(1) NOT NULL DEFAULT '0',
   `priority` tinyint(1) NOT NULL DEFAULT '0',
@@ -67,9 +73,8 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   `alarms` text NULL DEFAULT NULL,
   `attendees` text DEFAULT NULL,
   `notifyat` datetime DEFAULT NULL,
-
   `caldav_url` varchar(1000) NOT NULL,
-  `caldav_tag` varchar(255) DEFAULT NULL,
+  `caldav_tag` varbinary(32) NOT NULL,
   `caldav_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY(`event_id`),
@@ -78,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   INDEX `caldav_calendar_notify_idx` (`calendar_id`,`notifyat`),
   CONSTRAINT `fk_caldav_events_calendar_id` FOREIGN KEY (`calendar_id`)
   REFERENCES `caldav_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
 
 CREATE TABLE IF NOT EXISTS `caldav_attachments` (
   `attachment_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -86,10 +91,11 @@ CREATE TABLE IF NOT EXISTS `caldav_attachments` (
   `filename` varchar(255) NOT NULL DEFAULT '',
   `mimetype` varchar(255) NOT NULL DEFAULT '',
   `size` int(11) NOT NULL DEFAULT '0',
-  `data` longtext NOT NULL,
+  `data` MEDIUMBLOB,
+  
   PRIMARY KEY(`attachment_id`),
   CONSTRAINT `fk_caldav_attachments_event_id` FOREIGN KEY (`event_id`)
   REFERENCES `caldav_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
 
-REPLACE INTO `system` (`name`, `value`) VALUES ('calendar-caldav-version', '2019010100');
+REPLACE INTO system (name, value) VALUES ('texxasrulez-caldav-version', '2020080100');
