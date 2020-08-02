@@ -38,8 +38,7 @@
 		"sabre/event": "*",
 		"sabre/vobject": "*",
 		"league/oauth2-client": "*",
-		"league/oauth2-google": "*",
-		"fxp/composer-asset-plugin": "*"
+		"league/oauth2-google": "*"
 	},
 	"scripts": {
 		"post-install-cmd": [
