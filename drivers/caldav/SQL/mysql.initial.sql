@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `caldav_attachments` (
   `data` longtext COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`attachment_id`),
   KEY `fk_caldav_attachments_event_id` (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `caldav_calendars` (
   `calendar_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `caldav_calendars` (
   `caldav_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`calendar_id`),
   KEY `caldav_user_name_idx` (`user_id`,`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `caldav_events` (
   `event_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   KEY `caldav_uid_idx` (`uid`),
   KEY `caldav_recurrence_idx` (`recurrence_id`),
   KEY `caldav_calendar_notify_idx` (`calendar_id`,`notifyat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `caldav_attachments`
   ADD CONSTRAINT `fk_caldav_attachments_event_id` FOREIGN KEY (`event_id`) REFERENCES `caldav_events` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE;
