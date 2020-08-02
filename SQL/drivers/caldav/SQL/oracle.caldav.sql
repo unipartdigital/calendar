@@ -45,7 +45,7 @@ CREATE TABLE caldav_calendars (
  ,
   CONSTRAINT fk_caldav_calendars_user_id FOREIGN KEY (user_id)
   REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 -- Generate ID using sequence and trigger
 CREATE SEQUENCE caldav_calendars_seq START WITH 1 INCREMENT BY 1;
@@ -94,7 +94,7 @@ CREATE TABLE caldav_events (
  ,
   CONSTRAINT fk_caldav_events_calendar_id FOREIGN KEY (calendar_id)
   REFERENCES caldav_calendars(calendar_id) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 -- Generate ID using sequence and trigger
 CREATE SEQUENCE caldav_events_seq START WITH 1 INCREMENT BY 1;
@@ -122,7 +122,7 @@ CREATE TABLE caldav_attachments (
   PRIMARY KEY(attachment_id),
   CONSTRAINT fk_caldav_attachments_event_id FOREIGN KEY (event_id)
   REFERENCES caldav_events(event_id) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 -- Generate ID using sequence and trigger
 CREATE SEQUENCE caldav_attachments_seq START WITH 1 INCREMENT BY 1;

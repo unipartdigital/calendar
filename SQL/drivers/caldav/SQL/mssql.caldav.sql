@@ -45,7 +45,7 @@ CREATE TABLE caldav_calendars (
  ,
   CONSTRAINT [fk_caldav_calendars_user_id] FOREIGN KEY ([user_id])
   REFERENCES users([user_id]) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 CREATE INDEX [caldav_user_name_idx] ON caldav_calendars ([user_id], [name]);
 
@@ -83,7 +83,7 @@ CREATE TABLE caldav_events (
  ,
   CONSTRAINT [fk_caldav_events_calendar_id] FOREIGN KEY ([calendar_id])
   REFERENCES caldav_calendars([calendar_id]) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 CREATE INDEX [caldav_uid_idx] ON caldav_events ([uid]);
 CREATE INDEX [caldav_recurrence_idx] ON caldav_events ([recurrence_id]);
@@ -100,6 +100,6 @@ CREATE TABLE caldav_attachments (
   PRIMARY KEY([attachment_id]),
   CONSTRAINT [fk_caldav_attachments_event_id] FOREIGN KEY ([event_id])
   REFERENCES caldav_events([event_id]) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 REPLACE INTO system (name, value) SELECT ('tx-caldav-calendar-version', '2020080200');

@@ -102,7 +102,7 @@ PRIMARY KEY(`attachment_id`),
 FOREIGN KEY (`event_id`)
 REFERENCES `caldav_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
-REPLACE INTO `system` (`name`, `value`) VALUES ('calendar-caldav-version', '2019010100');
+REPLACE INTO `system` (`name`, `value`) VALUES ('tx-caldav-calendar-version', '2020080200');
 
 COMMIT;
 PRAGMA ignore_check_constraints = ON;

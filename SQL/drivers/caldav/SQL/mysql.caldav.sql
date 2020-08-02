@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `caldav_calendars` (
   INDEX `caldav_user_name_idx` (`user_id`, `name`),
   CONSTRAINT `fk_caldav_calendars_user_id` FOREIGN KEY (`user_id`)
   REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 CREATE TABLE IF NOT EXISTS `caldav_events` (
   `event_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   INDEX `caldav_calendar_notify_idx` (`calendar_id`,`notifyat`),
   CONSTRAINT `fk_caldav_events_calendar_id` FOREIGN KEY (`calendar_id`)
   REFERENCES `caldav_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 CREATE TABLE IF NOT EXISTS `caldav_attachments` (
   `attachment_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -96,6 +96,6 @@ CREATE TABLE IF NOT EXISTS `caldav_attachments` (
   PRIMARY KEY(`attachment_id`),
   CONSTRAINT `fk_caldav_attachments_event_id` FOREIGN KEY (`event_id`)
   REFERENCES `caldav_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 REPLACE INTO system (name, value) VALUES ('tx-caldav-calendar-version', '2020080200');
