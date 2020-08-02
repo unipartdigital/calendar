@@ -31,4 +31,4 @@ CREATE TABLE IF NOT EXISTS `calendar_oauth_refresh_tokens` (
   UNIQUE (provider, client_config_id, user_id, scope)
 );
 
-REPLACE INTO `system` (`name`, `value`) VALUES ('calendar-version', '2016011300');
+REPLACE INTO `system` (`name`, `value`) VALUES ('tx-calendar-oauth-version', '2020100900');

@@ -1,5 +1,5 @@
-/**
- * CalDAV Client
+/*
+ * iCAL Client
  *
  * @version @package_version@
  * @author Daniel Morlock <daniel.morlock@awesome-it.de>
@@ -20,28 +20,25 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-CREATE TABLE IF NOT EXISTS `caldav_calendars` (
+CREATE TABLE IF NOT EXISTS `ical_calendars` (
   `calendar_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL,
   `color` varchar(8) NOT NULL,
   `showalarms` tinyint(1) NOT NULL DEFAULT '1',
 
-  `caldav_url` varchar(1000) NOT NULL,
-  `caldav_tag` varchar(255) DEFAULT NULL,
-  `caldav_user` varchar(255) DEFAULT NULL,
-  `caldav_pass` varchar(1024) DEFAULT NULL,
-  `caldav_oauth_provider` varchar(255) DEFAULT NULL,
-  `readonly` int NOT NULL DEFAULT '0',
-  `caldav_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ical_url` varchar(255) NOT NULL,
+  `ical_user` varchar(255) DEFAULT NULL,
+  `ical_pass` varchar(1024) DEFAULT NULL,
+  `ical_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY(`calendar_id`),
-  INDEX `caldav_user_name_idx` (`user_id`, `name`),
-  CONSTRAINT `fk_caldav_calendars_user_id` FOREIGN KEY (`user_id`)
+  INDEX `ical_user_name_idx` (`user_id`, `name`),
+  CONSTRAINT `fk_ical_calendars_user_id` FOREIGN KEY (`user_id`)
   REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
-CREATE TABLE IF NOT EXISTS `caldav_events` (
+CREATE TABLE IF NOT EXISTS `ical_events` (
   `event_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `calendar_id` int(11) UNSIGNED NOT NULL DEFAULT '0',
   `recurrence_id` int(11) UNSIGNED NOT NULL DEFAULT '0',
@@ -53,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   `sequence` int(1) UNSIGNED NOT NULL DEFAULT '0',
   `start` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `end` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
-  `recurrence` varchar(1000) DEFAULT NULL,
+  `recurrence` varchar(255) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `location` varchar(255) NOT NULL DEFAULT '',
@@ -68,19 +65,18 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   `attendees` text DEFAULT NULL,
   `notifyat` datetime DEFAULT NULL,
 
-  `caldav_url` varchar(1000) NOT NULL,
-  `caldav_tag` varchar(255) DEFAULT NULL,
-  `caldav_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ical_url` varchar(255) NOT NULL,
+  `ical_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY(`event_id`),
-  INDEX `caldav_uid_idx` (`uid`),
-  INDEX `caldav_recurrence_idx` (`recurrence_id`),
-  INDEX `caldav_calendar_notify_idx` (`calendar_id`,`notifyat`),
-  CONSTRAINT `fk_caldav_events_calendar_id` FOREIGN KEY (`calendar_id`)
-  REFERENCES `caldav_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  INDEX `ical_uid_idx` (`uid`),
+  INDEX `ical_recurrence_idx` (`recurrence_id`),
+  INDEX `ical_calendar_notify_idx` (`calendar_id`,`notifyat`),
+  CONSTRAINT `fk_ical_events_calendar_id` FOREIGN KEY (`calendar_id`)
+  REFERENCES `ical_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
-CREATE TABLE IF NOT EXISTS `caldav_attachments` (
+CREATE TABLE IF NOT EXISTS `ical_attachments` (
   `attachment_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `event_id` int(11) UNSIGNED NOT NULL DEFAULT '0',
   `filename` varchar(255) NOT NULL DEFAULT '',
@@ -88,8 +84,8 @@ CREATE TABLE IF NOT EXISTS `caldav_attachments` (
   `size` int(11) NOT NULL DEFAULT '0',
   `data` longtext NOT NULL,
   PRIMARY KEY(`attachment_id`),
-  CONSTRAINT `fk_caldav_attachments_event_id` FOREIGN KEY (`event_id`)
-  REFERENCES `caldav_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_ical_attachments_event_id` FOREIGN KEY (`event_id`)
+  REFERENCES `ical_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
-REPLACE INTO `system` (`name`, `value`) VALUES ('calendar-caldav-version', '2019010100');
+REPLACE INTO `system` (`name`, `value`) VALUES ('tx-calendar-ical-version', '2020100900');
