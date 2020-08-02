@@ -34,16 +34,19 @@
 		"roundcube/plugin-installer": "~0.1.6",
 		"texxasrulez/libcalendaring": "*",
 		"texxasrulez/libkolab": "*",
-		"sabre/dav": "4.1.1",
+		"sabre/dav": "3.1.0",
 		"sabre/event": "*",
+		"sabre/http": "*",
+		"sabre/uri": "*",
 		"sabre/vobject": "*",
+		"sabre/xml": "*",
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*"
 	},
 	"extra": {
 		"roundcube": {
 			"min-version": "1.4.0",
-			"sql-dir": "drivers/caldav/SQL"
+			"sql-dir": "SQL"
 		}
 	},
 	"minimum-stability": "dev"
