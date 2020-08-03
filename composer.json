@@ -34,11 +34,11 @@
 		"roundcube/plugin-installer": "~0.1.6",
 		"texxasrulez/libcalendaring": "*",
 		"texxasrulez/libkolab": "*",
-		"sabre/dav": "3.1.0",
+		"sabre/dav": "*",
 		"sabre/event": "*",
 		"sabre/http": "*",
 		"sabre/uri": "*",
-		"sabre/vobject": "*",
+		"sabre/vobject": "3.5.3",
 		"sabre/xml": "*",
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*"
