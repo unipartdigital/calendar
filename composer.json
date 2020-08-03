@@ -49,5 +49,8 @@
 			"sql-dir": "SQL"
 		}
 	},
-	"minimum-stability": "dev"
+	"minimum-stability": "dev",
+	"scripts": {
+		"post-install-cmd": "bin/copyDateTimeParse.php"
+	}
 }
