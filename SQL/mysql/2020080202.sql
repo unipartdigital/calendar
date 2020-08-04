@@ -97,5 +97,3 @@ CREATE TABLE IF NOT EXISTS `itipinvitations` (
   CONSTRAINT `fk_itipinvitations_user_id` FOREIGN KEY (`user_id`)
     REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
-
-REPLACE INTO system (name, value) VALUES ('tx-database-calendar-version', '2020080402');
