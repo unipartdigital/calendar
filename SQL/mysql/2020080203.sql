@@ -95,4 +95,4 @@ CREATE TABLE IF NOT EXISTS `ical_attachments` (
   REFERENCES `ical_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
-REPLACE INTO `system` (`name`, `value`) VALUES ('tx-ical-calendar-version', '2020080203');
+REPLACE INTO `system` (`name`, `value`) VALUES ('tx-ical-calendar-version', '2020080403');
