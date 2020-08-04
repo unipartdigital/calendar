@@ -12,11 +12,19 @@ Thank you for listening to this old mans ramblings.  \
 ---  
 
 **Tested and working using the following:**  
+* Debian 9.13
+* Apache2 v2.4.25
 * Roundcube v1.4.7
 * Composer v1.10.9
 * Nextcloud v18.0
 * PHP v7.2.32
 * MySQL Server v5.7.31
+* Sabre/Dav v3.0.9
+* Sabre/Event v2.0.2
+* Sabre/Http v4.2.1
+* Sabre/Uri v1.1.0
+* Sabre/Vobject v3.5.0
+* Sabre/Xml v1.4.1
 
 **Elastic Skin Support now available**
 
@@ -26,9 +34,12 @@ I will maintain this repo for as long as I can.
 
 This plugin is intended to be used with Nexcloud only at this point in time. The Calendar Plugin will sync already existing calendars from Nextcloud. If you want more than the default, you must add calendar within Nextcloud Calendar GUI and then go back to Roundcube and it will magically appear in your Roundcube Calendar GUI after a good refresh (F5). From Roundcube Calendar GUI, you can add, edit, delete, download, copy and add attachments to events. iTip invitations are succesfully sent, accepted, declined, etc upon inviting attendees ... 
 
-This is verified as compatible with RCMCARDDAV 3.0.3 as I use it to sync my contacts from Nextcloud to Roundcube.
+This is verified as compatible with RCMCARDDAV 3.0.3 as I use it to sync my contacts from Nextcloud to Roundcube.  
 
-For Older Roundcube versions (v1.3.x and older) download [v0.4](https://github.com/texxasrulez/caldav_calendar_te/releases/tag/0.4)
+**BE ADVISED**  
+I have tested out v4 of RCMCARDDAV and it is not compatible. I am working on it.  
+
+For Older Roundcube versions (v1.3.x and older) download [v0.4](https://github.com/texxasrulez/caldav_calendar_te/releases/tag/0.4)  
 
 
 **Installation** 

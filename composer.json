@@ -32,26 +32,24 @@
 	"require": {
 		"php": ">=7.1.0",
 		"roundcube/plugin-installer": "~0.1.6",
-		"texxasrulez/libcalendaring": "*",
-		"texxasrulez/libkolab": "*",
+		"texxasrulez/libcalendaring": "3.5.2",
+		"texxasrulez/libkolab": "3.5.4",
 		"sabre/dav": "3.0.9",
-		"sabre/event": "*",
-		"sabre/http": "*",
-		"sabre/uri": "*",
-		"sabre/vobject": "*",
-		"sabre/xml": "*",
+		"sabre/event": "2.0.2",
+		"sabre/http": "4.2.1",
+		"sabre/uri": "1.1.0",
+		"sabre/vobject": "3.5.0",
+		"sabre/xml": "1.4.1",
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*"
 	},
 	"extra": {
 		"roundcube": {
-			"min-version": "1.3.0",
+			"min-version": "1.4.0",
+			"max-version": "1.4.7",
 			"sql-dir": "SQL"
 		}
 	},
-    "bin": [
-        "bin/copyDateTimeParser.sh"
-    ],
 	"minimum-stability": "dev",
 	"scripts": {
 		"post-dependencies-solving": "bin/copyDateTimeParser.sh"
