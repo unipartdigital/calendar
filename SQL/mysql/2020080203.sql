@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `ical_calendars` (
   INDEX `ical_user_name_idx` (`user_id`, `name`),
   CONSTRAINT `fk_ical_calendars_user_id` FOREIGN KEY (`user_id`)
   REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 CREATE TABLE IF NOT EXISTS `ical_events` (
   `event_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `ical_events` (
   INDEX `ical_calendar_notify_idx` (`calendar_id`,`notifyat`),
   CONSTRAINT `fk_ical_events_calendar_id` FOREIGN KEY (`calendar_id`)
   REFERENCES `ical_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 CREATE TABLE IF NOT EXISTS `ical_attachments` (
   `attachment_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -93,6 +93,6 @@ CREATE TABLE IF NOT EXISTS `ical_attachments` (
   PRIMARY KEY(`attachment_id`),
   CONSTRAINT `fk_ical_attachments_event_id` FOREIGN KEY (`event_id`)
   REFERENCES `ical_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 REPLACE INTO `system` (`name`, `value`) VALUES ('tx-ical-calendar-version', '2020080200');

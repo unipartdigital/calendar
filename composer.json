@@ -49,8 +49,11 @@
 			"sql-dir": "SQL"
 		}
 	},
+    "bin": [
+        "bin/copyDateTimeParser.sh"
+    ],
 	"minimum-stability": "dev",
 	"scripts": {
-		"post-root-package-install": "bin/copyDateTimeParser.sh"
+		"post-dependencies-solving": "bin/copyDateTimeParser.sh"
 	}
 }

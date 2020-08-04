@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `caldav_calendars` (
   `color` varchar(8) NOT NULL,
   `showalarms` tinyint(1) NOT NULL DEFAULT '1',
   `caldav_url` varchar(1000) DEFAULT NULL,
-  `caldav_tag` varbinary(32) NOT NULL,
+  `caldav_tag` varbinary(32) DEFAULT NULL,
   `caldav_user` varchar(1000) DEFAULT NULL,
   `caldav_pass` varchar(1000) DEFAULT NULL,
   `caldav_oauth_provider` varbinary(200) DEFAULT NULL,
