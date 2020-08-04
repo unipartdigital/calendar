@@ -36,11 +36,10 @@ This plugin is intended to be used with Nexcloud only at this point in time. The
 
 This is verified as compatible with RCMCARDDAV 3.0.3 as I use it to sync my contacts from Nextcloud to Roundcube.  
 
-**BE ADVISED**  
-I have tested out v4 of RCMCARDDAV and it is not compatible. I am working on it.  
+**BE ADVISED**
+I have tested out v4 of RCMCARDDAV and it is not compatible with this calendar anymore but I am working on it.  
 
 For Older Roundcube versions (v1.3.x and older) download [v0.4](https://github.com/texxasrulez/caldav_calendar_te/releases/tag/0.4)  
-
 
 **Installation** 
 

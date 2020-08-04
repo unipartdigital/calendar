@@ -53,6 +53,11 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"scripts": {
-		"post-install-cmd": "bin/copyDateTimeParser.sh"
-	}
+		"post-install-cmd": [
+			"php bin/copyDateTimeParser.php"
+		]
+	},
+	"bin": [
+		"./bin/copyDateTimeParser.php"
+	]
 }
