@@ -53,6 +53,6 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"scripts": {
-		"post-dependencies-solving": "bin/copyDateTimeParser.sh"
+		"post-install-cmd": "bin/copyDateTimeParser.sh"
 	}
 }
