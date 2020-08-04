@@ -45,12 +45,12 @@
 	},
 	"extra": {
 		"roundcube": {
-			"min-version": "1.4.0",
+			"min-version": "1.3.0",
 			"sql-dir": "SQL"
 		}
 	},
 	"minimum-stability": "dev",
 	"scripts": {
-		"post-install-cmd": "bin/copyDateTimeParse.php"
+		"post-root-package-install": "bin/copyDateTimeParser.sh"
 	}
 }
