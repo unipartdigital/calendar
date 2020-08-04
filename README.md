@@ -45,6 +45,9 @@ For Older Roundcube versions (v1.3.x and older) download [v0.4](https://github.c
 **Installation** 
 
 composer require texxasrulez/calendar  
+This should download latest release version if you have stable version required in your composer.json  
+It will inject all sql schemas associated with this plugin with the exception of Kolab and LDAP.  
+I have left those schemas in the original direcotry of drivers/<driver-type>/SQL  
 edit config.inc.php with you url requirements  
 
 ***VERY IMPORTANT***
