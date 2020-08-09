@@ -56,8 +56,5 @@
 		"post-install-cmd": [
 			"php bin/copyDateTimeParser.php"
 		]
-	},
-	"bin": [
-		"./bin/copyDateTimeParser.php"
-	]
+	}
 }
