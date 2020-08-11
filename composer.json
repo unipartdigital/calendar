@@ -47,8 +47,6 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"scripts": {
-		"post-install-cmd": [
-			"php bin/copyDateTimeParser.php"
-		]
+		"all-day-fix": "php bin/copyDateTimeParser.php"
 	}
 }
