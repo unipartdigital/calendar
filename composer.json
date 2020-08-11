@@ -38,7 +38,7 @@
 		"sabre/event": "2.0.2",
 		"sabre/http": "4.2.1",
 		"sabre/uri": "1.1.0",
-		"sabre/vobject": "3.5.1",
+		"sabre/vobject": "3.5.3",
 		"sabre/xml": "1.4.1",
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*"
