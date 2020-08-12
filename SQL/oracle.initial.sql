@@ -1,5 +1,5 @@
 /*
- * Roundcube CalDav Calendar Schema
+ * Roundcube Database, CalDav & iCal Calendar Schema
  *
  * @author Gene Hawkins <texxasrulez@yahoo.com>
  *
@@ -37,14 +37,16 @@ CREATE TABLE calendar_oauth_refresh_tokens (
   issue_time NUMBER(10) NOT NULL,
   refresh_token varchar2(255) DEFAULT NULL,
   UNIQUE (provider(50), `client_config_id`(50), `user_id`(50), `scope`(50))
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;CREATE TABLE caldav_calendars (
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+
+CREATE TABLE caldav_calendars (
   calendar_id number(10) CHECK (calendar_id > 0) NOT NULL,
   user_id number(10) DEFAULT '0' CHECK (user_id > 0) NOT NULL,
   name varchar2(255) NOT NULL,
   color varchar2(8) NOT NULL,
   showalarms number(3) DEFAULT '1' NOT NULL,
   caldav_url varchar2(1000) DEFAULT NULL,
-  caldav_tag raw(32) DEFAULT NULL,
+  caldav_tag varchar2(32) DEFAULT 'COLLATE' NULL,
   caldav_user varchar2(1000) DEFAULT NULL,
   caldav_pass varchar2(1000) DEFAULT NULL,
   caldav_oauth_provider raw(200) DEFAULT NULL,
@@ -97,7 +99,7 @@ CREATE TABLE caldav_events (
   attendees clob DEFAULT NULL,
   notifyat timestamp(0) DEFAULT NULL,
   caldav_url varchar2(1000) NOT NULL,
-  caldav_tag varchar2(255) NOT NULL,
+  caldav_tag varchar2(32) DEFAULT 'COLLATE' NULL,
   caldav_last_change timestamp(0) DEFAULT SYSTIMESTAMP NOT NULL,
 
   PRIMARY KEY(event_id)
@@ -144,6 +146,7 @@ BEGIN
  SELECT caldav_attachments_seq.NEXTVAL INTO :NEW.attachment_id FROM DUAL;
 END;
 /
+
 CREATE TABLE database_calendars (
   calendar_id number(10) CHECK (calendar_id > 0) NOT NULL,
   user_id number(10) DEFAULT '0' CHECK (user_id > 0) NOT NULL,
@@ -253,6 +256,7 @@ CREATE TABLE itipinvitations (
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 CREATE INDEX uid_idx ON itipinvitations (user_id,event_uid);
+
 CREATE TABLE ical_calendars (
   calendar_id number(10) CHECK (calendar_id > 0) NOT NULL,
   user_id number(10) DEFAULT '0' CHECK (user_id > 0) NOT NULL,
@@ -358,4 +362,4 @@ BEGIN
 END;
 /
 
-REPLACE INTO `system` (name, value) SELECT  'tx-calendar-version', '2020080100'  FROM dual;
+REPLACE INTO `system` (name, value) SELECT  'calendar-version', '2020081200'  FROM dual;

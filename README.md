@@ -12,19 +12,41 @@ Thank you for listening to this old mans ramblings.  \
 ---  
 
 **Tested and working using the following:**  
-* Debian 9.13
-* Apache2 v2.4.25
-* Roundcube v1.4.7
-* Composer v1.10.9
-* Nextcloud v18.0
-* PHP v7.2.32
-* MySQL Server v5.7.31
-* Sabre/Dav v3.0.9
-* Sabre/Event v2.0.2
-* Sabre/Http v4.2.1
-* Sabre/Uri v1.1.0
-* Sabre/Vobject v3.5.3
-* Sabre/Xml v1.4.1
+* Debian 9.13  
+* Apache2 v2.4.25  
+* Roundcube v1.4.8  
+* Composer v1.10.9  
+* Nextcloud v19.0  
+* PHP v7.2.32  
+* MySQL Server v5.7.31  
+* Sabre/Dav v4.1.1  
+* Sabre/Event v5.1.0  
+* Sabre/Http v5.1.0  
+* Sabre/Uri v2.2.0  
+* Sabre/Vobject v4.3.1  
+* Sabre/Xml v2.2.1  
+
+**Installation** 
+
+`  composer require "texxasrulez/calendar": "~0.0.6.0"  `  
+
+This will download latest release version.  
+It will inject all sql schemas associated with this plugin with the exception of Kolab and LDAP.  
+I have left those schemas in the original direcotry of drivers/<driver-type>/SQL to manual install  
+
+After composer does its thang, change directories to plugins/calendar and type  
+`  composer run-script post-install-cmd  `  
+This will copy a file over to fix all-day recurring showing up a day early bug.  
+Remember to edit your config.inc.php for your url and you should be good to go.  
+
+**Multiple Databases now Supported**  
+* MSSQL  
+* MySQL (Only One I have used)  
+* Postgres  
+* Oracle  
+* SQLite  
+
+I have only personally tested the MySQL schema then converted it to the other SQL Servers out there that should work just fine. Let us all know if you have a known working calendar on the other DB's or can help add more.  
 
 **Elastic Skin Support now available**
 
@@ -36,30 +58,19 @@ This plugin is intended to be used with Nexcloud only at this point in time. The
 
 This is verified as compatible with RCMCARDDAV 3.0.3 as I use it to sync my contacts from Nextcloud to Roundcube.  
 
-**BE ADVISED**
-I have tested out v4 of RCMCARDDAV and it is not compatible with this calendar anymore but I am working on it.  
+**BE ADVISED**  
+I have tested out v4 of RCMCARDDAV and version 0.0.6.1 and below is not compatible with the future release of 4.x. Dev-Master and 0.0.7 and up is compatible.  
 
 For Older Roundcube versions (v1.3.x and older) download [v0.4](https://github.com/texxasrulez/caldav_calendar_te/releases/tag/0.4)  
 
-**Installation** 
-
-`composer require texxasrulez/calendar:0.0.6.1`  
-
-This will download latest release version.  
-It will inject all sql schemas associated with this plugin with the exception of Kolab and LDAP.  
-I have left those schemas in the original direcotry of drivers/<driver-type>/SQL to manual install  
-
-After composer does its thang, change directories to plugins/calendar and type `composer run-script post-install-cmd`  
-This will copy a file over to fix all-day recurring showing up a day early bug.  
-Remember to edit your config.inc.php for your url and you should be good to go.  
-
-***VERY IMPORTANT***
-
-Your username and password **must** be the same for Nextcloud and Roundcube to work properly.\
+***VERY IMPORTANT***  
+ Some of this should be moot now thanks to @MAT-WEISS-2017 for contributing some code to possibly get around this as I have not tested it.  
+ 
+~~Your username and password **must** be the same for Nextcloud and Roundcube to work properly.\~~  
 The Nextcloud account must be created and user must log into Nextcloud at least once before calendar will sync in Roundcube. Nextcloud does not create calendars until the initial login, so there will be no calendar for the Roundcube Calendar to find.\
-There are no plans at this time to implement the use of different login usernames. \
-There shouldn't be any issues if you create your users in Nextcloud using the exact username and password required to login to Roundcube. \
-There are configurable parameters to alter your email for logins within Roundcube config that may help you out if you require something a little different.  \
+  
+~~There shouldn't be any issues if you create your users in Nextcloud using the exact username and password required to login to Roundcube. \
+There are configurable parameters to alter your email for logins within Roundcube config that may help you out if you require something a little different.~~  \
 Your roundcube and nextcloud must be run from same domain, no subdomains because of cross-scripting issues.  
 
 **Known Issues**

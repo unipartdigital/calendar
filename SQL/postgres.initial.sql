@@ -1,5 +1,5 @@
 /*
- * Roundcube CalDav Calendar Schema
+ * Roundcube Database, CalDav & iCal Calendar Schema
  *
  * @author Gene Hawkins <texxasrulez@yahoo.com>
  *
@@ -37,7 +37,9 @@ CREATE TABLE IF NOT EXISTS calendar_oauth_refresh_tokens (
   issue_time INTEGER NOT NULL,
   refresh_token varchar(255) DEFAULT NULL,
   UNIQUE (provider(50), `client_config_id`(50), `user_id`(50), `scope`(50))
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;CREATE SEQUENCE caldav_calendars_seq;
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+
+CREATE SEQUENCE caldav_calendars_seq;
 
 CREATE TABLE IF NOT EXISTS caldav_calendars (
   calendar_id int CHECK (calendar_id > 0) NOT NULL DEFAULT NEXTVAL ('caldav_calendars_seq'),
@@ -46,7 +48,7 @@ CREATE TABLE IF NOT EXISTS caldav_calendars (
   color varchar(8) NOT NULL,
   showalarms smallint NOT NULL DEFAULT '1',
   caldav_url varchar(1000) DEFAULT NULL,
-  caldav_tag bytea DEFAULT NULL,
+  caldav_tag varchar(32) CHARACTER SET utf8mb4 NULL DEFAULT 'COLLATE',
   caldav_user varchar(1000) DEFAULT NULL,
   caldav_pass varchar(1000) DEFAULT NULL,
   caldav_oauth_provider bytea DEFAULT NULL,
@@ -90,7 +92,7 @@ CREATE TABLE IF NOT EXISTS caldav_events (
   attendees text DEFAULT NULL,
   notifyat timestamp(0) DEFAULT NULL,
   caldav_url varchar(1000) NOT NULL,
-  caldav_tag varchar(255) NOT NULL,
+  caldav_tag varchar(32) CHARACTER SET utf8mb4 NULL DEFAULT 'COLLATE',
   caldav_last_change timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY(event_id)
@@ -117,6 +119,7 @@ CREATE TABLE IF NOT EXISTS caldav_attachments (
   CONSTRAINT fk_caldav_attachments_event_id FOREIGN KEY (event_id)
   REFERENCES caldav_events(event_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+
 CREATE SEQUENCE database_calendars_seq;
 
 CREATE TABLE IF NOT EXISTS database_calendars (
@@ -199,6 +202,7 @@ CREATE TABLE IF NOT EXISTS itipinvitations (
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
 CREATE INDEX uid_idx ON itipinvitations (user_id,event_uid);
+
 CREATE SEQUENCE ical_calendars_seq;
 
 CREATE TABLE IF NOT EXISTS ical_calendars (
@@ -277,4 +281,4 @@ CREATE TABLE IF NOT EXISTS ical_attachments (
   REFERENCES ical_events(event_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
-REPLACE INTO `system` (name, value) SELECT ('tx-calendar-version', '2020080100');
+REPLACE INTO `system` (name, value) SELECT ('calendar-version', '2020081200');

@@ -1,5 +1,5 @@
 /*
- * Roundcube CalDav Calendar Schema
+ * Roundcube Database, CalDav & iCal Calendar Schema
  *
  * @author Gene Hawkins <texxasrulez@yahoo.com>
  *
@@ -37,14 +37,16 @@ CREATE TABLE IF NOT EXISTS `calendar_oauth_refresh_tokens` (
   `issue_time` INTEGER NOT NULL,
   `refresh_token` varchar(255) DEFAULT NULL,
   UNIQUE (`provider`(50), `client_config_id`(50), `user_id`(50), `scope`(50))
-) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;CREATE TABLE IF NOT EXISTS `caldav_calendars` (
+) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+
+CREATE TABLE IF NOT EXISTS `caldav_calendars` (
   `calendar_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL,
   `color` varchar(8) NOT NULL,
   `showalarms` tinyint(1) NOT NULL DEFAULT '1',
   `caldav_url` varchar(1000) DEFAULT NULL,
-  `caldav_tag` varchar(32)) DEFAULT NULL,
+  `caldav_tag` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'COLLATE',
   `caldav_user` varchar(1000) DEFAULT NULL,
   `caldav_pass` varchar(1000) DEFAULT NULL,
   `caldav_oauth_provider` varbinary(200) DEFAULT NULL,
@@ -84,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   `attendees` text DEFAULT NULL,
   `notifyat` datetime DEFAULT NULL,
   `caldav_url` varchar(1000) NOT NULL,
-  `caldav_tag` varchar(32) DEFAULT NULL,
+  `caldav_tag` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'COLLATE',
   `caldav_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY(`event_id`),
@@ -247,4 +249,4 @@ CREATE TABLE IF NOT EXISTS `ical_attachments` (
   REFERENCES `ical_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
-REPLACE INTO `system` (`name`, `value`) VALUES ('tx-calendar-version', '2020080100');
+REPLACE INTO `system` (`name`, `value`) VALUES ('calendar-version', '2020081200');
