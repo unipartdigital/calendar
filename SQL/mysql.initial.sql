@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `calendar_oauth_refresh_tokens` (
   `color` varchar(8) NOT NULL,
   `showalarms` tinyint(1) NOT NULL DEFAULT '1',
   `caldav_url` varchar(1000) DEFAULT NULL,
-  `caldav_tag` varbinary(32) DEFAULT NULL,
+  `caldav_tag` varchar(32)) DEFAULT NULL,
   `caldav_user` varchar(1000) DEFAULT NULL,
   `caldav_pass` varchar(1000) DEFAULT NULL,
   `caldav_oauth_provider` varbinary(200) DEFAULT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `caldav_events` (
   `attendees` text DEFAULT NULL,
   `notifyat` datetime DEFAULT NULL,
   `caldav_url` varchar(1000) NOT NULL,
-  `caldav_tag` varchar(255) NOT NULL,
+  `caldav_tag` varchar(32) DEFAULT NULL,
   `caldav_last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY(`event_id`),
@@ -107,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `caldav_attachments` (
   CONSTRAINT `fk_caldav_attachments_event_id` FOREIGN KEY (`event_id`)
   REFERENCES `caldav_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+
 CREATE TABLE IF NOT EXISTS `database_calendars` (
   `calendar_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -177,6 +178,7 @@ CREATE TABLE IF NOT EXISTS `itipinvitations` (
   CONSTRAINT `fk_itipinvitations_user_id` FOREIGN KEY (`user_id`)
     REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+
 CREATE TABLE IF NOT EXISTS `ical_calendars` (
   `calendar_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',

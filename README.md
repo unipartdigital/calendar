@@ -23,7 +23,7 @@ Thank you for listening to this old mans ramblings.  \
 * Sabre/Event v2.0.2
 * Sabre/Http v4.2.1
 * Sabre/Uri v1.1.0
-* Sabre/Vobject v3.5.0
+* Sabre/Vobject v3.5.3
 * Sabre/Xml v1.4.1
 
 **Elastic Skin Support now available**
@@ -43,11 +43,15 @@ For Older Roundcube versions (v1.3.x and older) download [v0.4](https://github.c
 
 **Installation** 
 
-composer require texxasrulez/calendar  
-This should download latest release version if you have stable version required in your composer.json  
+`composer require texxasrulez/calendar:0.0.6.1`  
+
+This will download latest release version.  
 It will inject all sql schemas associated with this plugin with the exception of Kolab and LDAP.  
-I have left those schemas in the original direcotry of drivers/<driver-type>/SQL  
-edit config.inc.php with you url requirements  
+I have left those schemas in the original direcotry of drivers/<driver-type>/SQL to manual install  
+
+After composer does its thang, change directories to plugins/calendar and type `composer run-script post-install-cmd`  
+This will copy a file over to fix all-day recurring showing up a day early bug.  
+Remember to edit your config.inc.php for your url and you should be good to go.  
 
 ***VERY IMPORTANT***
 
