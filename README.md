@@ -63,15 +63,18 @@ From Roundcube Calendar GUI, you can add, edit, delete, download, copy and add a
 are succesfully sent, accepted, declined, etc upon inviting attendees ...   
 
 ***VERY IMPORTANT***  
- Some of this should be moot now thanks to @MAT-WEISS-2017 for contributing his time and some code to help get around some of this as I have not tested it.  
+ Some of this should be moot now thanks to @MAT-WEISS-2017 for contributing his time and some code to help get around the crossed out requirements.  
+ I have not tested this but this user has contributed code in the past and has nailed it every time.  
  
 Your roundcube and nextcloud must be run from same domain, no subdomains because of cross-scripting issues.  
-If you are skilled in the ways of the Server Admin, you should have no trouble getting around it.    
+If you are skilled in the ways of the Server Admin, you should have no trouble getting around the cross-scripting issue.  
+
 The Nextcloud account must be created and user must log into Nextcloud at least once before calendar will sync in Roundcube.  
+The user can just click on the "Cloud" icon if you are using my Nextcloud Plugin and that will trigger calendar and addressbook creation.  
 Nextcloud does not create calendars until the initial login, so there will be no calendar for the Roundcube Calendar to find.  
   
 ~~Your username and password **must** be the same for Nextcloud and Roundcube to work properly.  
-There shouldn't be any issues if you create your users in Nextcloud using the exact username and password required to login to Roundcube. \
+There shouldn't be any issues if you create your users in Nextcloud using the exact username and password required to login to Roundcube.  
 There are configurable parameters to alter your email for logins within Roundcube config that may help you out if you require something a little different.~~  
 
 **Known Issues**
@@ -89,11 +92,11 @@ There are configurable parameters to alter your email for logins within Roundcub
 **Wishlist**
 
 - [ ] Add the ability to create new calendar within Roundcube Calendar GUI.  
-- [ ] Oauth support for a wider range of calendar choices. (Next thing I want so I am working on it.  
+- [ ] Oauth support for a wider range of calendar choices. (Next thing I want so I am working on it.)  
 - [ ] Add a preview / agenda list in main Mail Tab within the left side column at the bottom.  
 - [x] ~~Assign random colors upon initial sync of calendars.~~ - Thank you @drlight17  
 - [ ] Add sound notifications.  
-- [ ] Integrate a Caldav Enabled Tasklist plugin.  
+- [ ] Integrate a Caldav Enabled Tasklist plugin. (This is on the very back burner.)  
 - [x] ~~Add Emoticon Support.~~ @texxasrulez  
 - [x] ~~Remove mcrypt and replace with openssl.~~ Thank you @MAT-WEISS-2017  
 * User feature requests are always welcome but I cannot guarantee if I can pull it off ... :relaxed:  
@@ -101,7 +104,8 @@ There are configurable parameters to alter your email for logins within Roundcub
 **Submitting Issues**
 
 Since I constantly work on this, issues may or may not be attended to in any timely manner. I will be introducing bugs and fixing and back again.  
-Issue Submitting is by all means totally welcome since details given by users will help me out ...
+Issue Submitting is by all means totally welcome since details given by users will help me out ...  
+I will always specify the latest working stable release to download and use.  
 
 :moneybag: **Donations** :moneybag:
 
@@ -110,5 +114,4 @@ A regular cup of Joe is sufficient, but a Starbucks Coffee would be better ...
 Zelle (Zelle is integrated within many major banks Mobile Apps by default) - Just send to texxasrulez at yahoo dot com  
 No Zelle in your banks mobile app, no problem, just click [Paypal](https://paypal.me/texxasrulez?locale.x=en_US) and I can make a Starbucks run ...
 
-I appreciate the interest in this plugin and wish nothing but the best for all ...
-
+I appreciate the interest in this plugin and wish nothing but the best for all ...  
