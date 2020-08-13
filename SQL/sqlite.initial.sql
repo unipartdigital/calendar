@@ -15,7 +15,7 @@ PRAGMA auto_vacuum = NONE;
 PRAGMA secure_delete = OFF;
 BEGIN TRANSACTION;
 
-CREATE TABLE IF NOT EXISTS `calendar_oauth_states` (
+CREATE TABLE `calendar_oauth_states` (
 `provider` TEXT NOT NULL,
 `client_config_id` TEXT NOT NULL,
 `user_id` TEXT NOT NULL,
@@ -26,7 +26,7 @@ UNIQUE (`provider`(50), `client_config_id`(50), `user_id`(50), `scope`(50)),
 PRIMARY KEY (`state`)
 );
 
-CREATE TABLE IF NOT EXISTS `calendar_oauth_access_tokens` (
+CREATE TABLE `calendar_oauth_access_tokens` (
 `provider` TEXT NOT NULL,
 `client_config_id` TEXT NOT NULL,
 `user_id` TEXT NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `calendar_oauth_access_tokens` (
 UNIQUE (`provider`(50), `client_config_id`(50), `user_id`(50), `scope`(50))
 );
 
-CREATE TABLE IF NOT EXISTS `calendar_oauth_refresh_tokens` (
+CREATE TABLE `calendar_oauth_refresh_tokens` (
 `provider` TEXT NOT NULL,
 `client_config_id` TEXT NOT NULL,
 `user_id` TEXT NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `calendar_oauth_refresh_tokens` (
 UNIQUE (`provider`(50), `client_config_id`(50), `user_id`(50), `scope`(50))
 );
 
-CREATE TABLE IF NOT EXISTS `caldav_calendars` (
+CREATE TABLE `caldav_calendars` (
 `calendar_id` INTEGER  NOT NULL ,
 `user_id` INTEGER  NOT NULL DEFAULT '0',
 `name` TEXT NOT NULL,
@@ -67,7 +67,7 @@ FOREIGN KEY (`user_id`)
 REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `caldav_events` (
+CREATE TABLE `caldav_events` (
 `event_id` INTEGER  NOT NULL ,
 `calendar_id` INTEGER  NOT NULL DEFAULT '0',
 `recurrence_id` INTEGER  NOT NULL DEFAULT '0',
@@ -104,7 +104,7 @@ FOREIGN KEY (`calendar_id`)
 REFERENCES `caldav_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `caldav_attachments` (
+CREATE TABLE `caldav_attachments` (
 `attachment_id` INTEGER  NOT NULL ,
 `event_id` INTEGER  NOT NULL DEFAULT '0',
 `filename` TEXT NOT NULL DEFAULT '',
@@ -116,7 +116,7 @@ FOREIGN KEY (`event_id`)
 REFERENCES `caldav_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `database_calendars` (
+CREATE TABLE `database_calendars` (
 `calendar_id` INTEGER  NOT NULL ,
 `user_id` INTEGER  NOT NULL DEFAULT '0',
 `name` TEXT NOT NULL,
@@ -128,7 +128,7 @@ FOREIGN KEY (`user_id`)
 REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `database_events` (
+CREATE TABLE `database_events` (
 `event_id` INTEGER  NOT NULL ,
 `calendar_id` INTEGER  NOT NULL DEFAULT '0',
 `recurrence_id` INTEGER  NOT NULL DEFAULT '0',
@@ -162,7 +162,7 @@ FOREIGN KEY (`calendar_id`)
 REFERENCES `database_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `database_attachments` (
+CREATE TABLE `database_attachments` (
 `attachment_id` INTEGER  NOT NULL ,
 `event_id` INTEGER  NOT NULL DEFAULT '0',
 `filename` TEXT NOT NULL DEFAULT '',
@@ -174,7 +174,7 @@ FOREIGN KEY (`event_id`)
 REFERENCES `database_events`(`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `itipinvitations` (
+CREATE TABLE `itipinvitations` (
 `token` TEXT NOT NULL,
 `event_uid` TEXT NOT NULL,
 `user_id` INTEGER  NOT NULL DEFAULT '0',
@@ -187,7 +187,7 @@ FOREIGN KEY (`user_id`)
 REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `ical_calendars` (
+CREATE TABLE `ical_calendars` (
 `calendar_id` INTEGER  NOT NULL ,
 `user_id` INTEGER  NOT NULL DEFAULT '0',
 `name` TEXT NOT NULL,
@@ -203,7 +203,7 @@ FOREIGN KEY (`user_id`)
 REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `ical_events` (
+CREATE TABLE `ical_events` (
 `event_id` INTEGER  NOT NULL ,
 `calendar_id` INTEGER  NOT NULL DEFAULT '0',
 `recurrence_id` INTEGER  NOT NULL DEFAULT '0',
@@ -239,7 +239,7 @@ FOREIGN KEY (`calendar_id`)
 REFERENCES `ical_calendars`(`calendar_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `ical_attachments` (
+CREATE TABLE `ical_attachments` (
 `attachment_id` INTEGER  NOT NULL ,
 `event_id` INTEGER  NOT NULL DEFAULT '0',
 `filename` TEXT NOT NULL DEFAULT '',

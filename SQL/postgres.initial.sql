@@ -6,7 +6,7 @@
  * @licence GNU AGPL
  */
 
-CREATE TABLE IF NOT EXISTS calendar_oauth_states (
+CREATE TABLE calendar_oauth_states (
   provider varchar(255) NOT NULL,
   client_config_id varchar(255) NOT NULL,
   user_id varchar(255) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS calendar_oauth_states (
   PRIMARY KEY (state)
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
-CREATE TABLE IF NOT EXISTS calendar_oauth_access_tokens (
+CREATE TABLE calendar_oauth_access_tokens (
   provider varchar(255) NOT NULL,
   client_config_id varchar(255) NOT NULL,
   user_id varchar(255) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS calendar_oauth_access_tokens (
   UNIQUE (provider(50), `client_config_id`(50), `user_id`(50), `scope`(50))
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
-CREATE TABLE IF NOT EXISTS calendar_oauth_refresh_tokens (
+CREATE TABLE calendar_oauth_refresh_tokens (
   provider varchar(255) NOT NULL,
   client_config_id varchar(255) NOT NULL,
   user_id varchar(255) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS calendar_oauth_refresh_tokens (
 
 CREATE SEQUENCE caldav_calendars_seq;
 
-CREATE TABLE IF NOT EXISTS caldav_calendars (
+CREATE TABLE caldav_calendars (
   calendar_id int CHECK (calendar_id > 0) NOT NULL DEFAULT NEXTVAL ('caldav_calendars_seq'),
   user_id int CHECK (user_id > 0) NOT NULL DEFAULT '0',
   name varchar(255) NOT NULL,
@@ -65,7 +65,7 @@ CREATE INDEX caldav_user_name_idx ON caldav_calendars (user_id, name);
 
 CREATE SEQUENCE caldav_events_seq;
 
-CREATE TABLE IF NOT EXISTS caldav_events (
+CREATE TABLE caldav_events (
   event_id int CHECK (event_id > 0) NOT NULL DEFAULT NEXTVAL ('caldav_events_seq'),
   calendar_id int CHECK (calendar_id > 0) NOT NULL DEFAULT '0',
   recurrence_id int CHECK (recurrence_id > 0) NOT NULL DEFAULT '0',
@@ -107,7 +107,7 @@ CREATE INDEX caldav_calendar_notify_idx ON caldav_events (calendar_id,notifyat);
 
 CREATE SEQUENCE caldav_attachments_seq;
 
-CREATE TABLE IF NOT EXISTS caldav_attachments (
+CREATE TABLE caldav_attachments (
   attachment_id int CHECK (attachment_id > 0) NOT NULL DEFAULT NEXTVAL ('caldav_attachments_seq'),
   event_id int CHECK (event_id > 0) NOT NULL DEFAULT '0',
   filename varchar(255) NOT NULL DEFAULT '',
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS caldav_attachments (
 
 CREATE SEQUENCE database_calendars_seq;
 
-CREATE TABLE IF NOT EXISTS database_calendars (
+CREATE TABLE database_calendars (
   calendar_id int CHECK (calendar_id > 0) NOT NULL DEFAULT NEXTVAL ('database_calendars_seq'),
   user_id int CHECK (user_id > 0) NOT NULL DEFAULT '0',
   name varchar(255) NOT NULL,
@@ -138,7 +138,7 @@ CREATE INDEX user_name_idx ON database_calendars (user_id, name);
 
 CREATE SEQUENCE database_events_seq;
 
-CREATE TABLE IF NOT EXISTS database_events (
+CREATE TABLE database_events (
   event_id int CHECK (event_id > 0) NOT NULL DEFAULT NEXTVAL ('database_events_seq'),
   calendar_id int CHECK (calendar_id > 0) NOT NULL DEFAULT '0',
   recurrence_id int CHECK (recurrence_id > 0) NOT NULL DEFAULT '0',
@@ -176,7 +176,7 @@ CREATE INDEX calendar_notify_idx ON database_events (calendar_id,notifyat);
 
 CREATE SEQUENCE database_attachments_seq;
 
-CREATE TABLE IF NOT EXISTS database_attachments (
+CREATE TABLE database_attachments (
   attachment_id int CHECK (attachment_id > 0) NOT NULL DEFAULT NEXTVAL ('database_attachments_seq'),
   event_id int CHECK (event_id > 0) NOT NULL DEFAULT '0',
   filename varchar(255) NOT NULL DEFAULT '',
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS database_attachments (
     REFERENCES database_events(event_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) /*!40000 ENGINE=INNODB */ /*!40101 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
-CREATE TABLE IF NOT EXISTS itipinvitations (
+CREATE TABLE itipinvitations (
   token VARCHAR(64) NOT NULL,
   event_uid VARCHAR(255) NOT NULL,
   user_id int CHECK (user_id > 0) NOT NULL DEFAULT '0',
@@ -205,7 +205,7 @@ CREATE INDEX uid_idx ON itipinvitations (user_id,event_uid);
 
 CREATE SEQUENCE ical_calendars_seq;
 
-CREATE TABLE IF NOT EXISTS ical_calendars (
+CREATE TABLE ical_calendars (
   calendar_id int CHECK (calendar_id > 0) NOT NULL DEFAULT NEXTVAL ('ical_calendars_seq'),
   user_id int CHECK (user_id > 0) NOT NULL DEFAULT '0',
   name varchar(255) NOT NULL,
@@ -227,7 +227,7 @@ CREATE INDEX ical_user_name_idx ON ical_calendars (user_id, name);
 
 CREATE SEQUENCE ical_events_seq;
 
-CREATE TABLE IF NOT EXISTS ical_events (
+CREATE TABLE ical_events (
   event_id int CHECK (event_id > 0) NOT NULL DEFAULT NEXTVAL ('ical_events_seq'),
   calendar_id int CHECK (calendar_id > 0) NOT NULL DEFAULT '0',
   recurrence_id int CHECK (recurrence_id > 0) NOT NULL DEFAULT '0',
@@ -269,7 +269,7 @@ CREATE INDEX ical_calendar_notify_idx ON ical_events (calendar_id,notifyat);
 
 CREATE SEQUENCE ical_attachments_seq;
 
-CREATE TABLE IF NOT EXISTS ical_attachments (
+CREATE TABLE ical_attachments (
   attachment_id int CHECK (attachment_id > 0) NOT NULL DEFAULT NEXTVAL ('ical_attachments_seq'),
   event_id int CHECK (event_id > 0) NOT NULL DEFAULT '0',
   filename varchar(255) NOT NULL DEFAULT '',
