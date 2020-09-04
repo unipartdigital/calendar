@@ -40,7 +40,7 @@ $config['calendar_sync_period'] = "600";
 $config['calendar_default_calendar'] = 'Personal';
 
 // show a birthdays calendar from the user's address book(s)
-$config['calendar_contact_birthdays'] = false;	// TODO
+$config['calendar_contact_birthdays'] = false;	// TODO - DO NOT CHECK BOX IN RC SETTINGS - Instead, let NC generate the bday calendar and it will show up.
 
 
 // mapping of Roundcube date formats to calendar formats (long/short/agenda)
