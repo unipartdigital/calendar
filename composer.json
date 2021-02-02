@@ -32,9 +32,9 @@
 	"require": {
 		"php": ">=7.1.0",
 		"roundcube/plugin-installer": "*",
-		"texxasrulez/libcalendaring": "3.5.2",
-		"texxasrulez/libkolab": "3.5.4",
-		"sabre/dav": "4.1.1",
+		"texxasrulez/libcalendaring": "*",
+		"texxasrulez/libkolab": "*",
+		"sabre/dav": "*",
 		"league/oauth2-client": "*",
 		"league/oauth2-google": "*"
 	},
