@@ -40,7 +40,7 @@
 	},
 	"extra": {
 		"roundcube": {
-			"min-version": "*",
+			"min-version": "1.4.0",
 			"sql-dir": "SQL"
 		}
 	},
